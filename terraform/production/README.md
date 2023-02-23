@@ -4,7 +4,9 @@
 
 Repo containing Terraform files that are currently being used, aka "production".
 
-## AWS assumptions
+## Requirements
+
+### AWS
 
 * The AWS account was already created
 * The `Administrators` group was [already created](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) with the `AdministratorAccess` policy.
@@ -14,6 +16,10 @@ Repo containing Terraform files that are currently being used, aka "production".
   * Are already members of the `Administrators` group
   * Already have their access keys recorded
   * AWS CLI is already setup
+
+## DigitalOcean
+
+* An API key is already generated
 
 ## Usage
 
