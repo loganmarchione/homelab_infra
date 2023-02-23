@@ -12,6 +12,6 @@ Turning electricty into heat since 2015.
 
 This monorepo contains the directories below. See each directory for a more detailed `README.md`.
 
-| Directory   | Contents              | Comments                                        |
-|-------------|-----------------------|-------------------------------------------------|
-| `terraform` | Terraform (IaC files) | Each environment is contained in a subdirectory |
+| Directory                | Contents              | Comments                                        |
+|--------------------------|-----------------------|-------------------------------------------------|
+| [`terraform`](terraform) | Terraform (IaC files) | Each environment is contained in a subdirectory |
