@@ -1,9 +1,11 @@
-# terraform
+# production
 
-## Overview
-Repo containing Terraform files.
+## Explanation
+
+Repo containing Terraform files that are currently being used, aka "production".
 
 ## AWS assumptions
+
 * The AWS account was already created
 * The `Administrators` group was [already created](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) with the `AdministratorAccess` policy.
 * Access to billing has been [granted to IAM users](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#ControllingAccessWebsite-Activate).
