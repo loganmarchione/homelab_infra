@@ -137,7 +137,7 @@ resource "aws_s3_bucket_acl" "loganmarchione_com_resources_acl" {
   acl    = "public-read"
 }
 
-# Disable bucket versioning
+# Enable bucket versioning
 resource "aws_s3_bucket_versioning" "loganmarchione_com_resources_versioning" {
   bucket = aws_s3_bucket.loganmarchione_com_resources.id
   versioning_configuration {
