@@ -15,4 +15,10 @@ Repo containing Terraform files that are currently being used, aka "production".
   * Already have their access keys recorded
   * AWS CLI is already setup
 
+## Usage
+
+```
+terraform plan -var-file=secrets.tfvars
+```
+
 ## Things you'll need to do manually (the functionality isn't in Terraform)
