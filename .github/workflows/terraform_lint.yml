@@ -50,4 +50,4 @@ jobs:
         run: tflint --init
 
       - name: TFLint validate
-        run: tflint -f compact
+        run: tflint
