@@ -10,7 +10,7 @@ Turning electricty into heat since 2015.
 
 ## Explanation
 
-This monorepo contains the following
+This monorepo contains the directories below. See each directory for a more detailed `README.md`.
 
 | Directory   | Contents              | Comments                                        |
 |-------------|-----------------------|-------------------------------------------------|
