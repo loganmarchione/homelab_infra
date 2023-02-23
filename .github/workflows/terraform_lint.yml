@@ -40,6 +40,8 @@ jobs:
 
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v3
+        with:
+          github_token: ${{ secrets.TOKEN }}
 
       - name: TFLint version
         run: tflint --version
