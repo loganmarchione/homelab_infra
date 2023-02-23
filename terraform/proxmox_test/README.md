@@ -2,7 +2,8 @@
 
 This Terraform provider ([Telmate/proxmox](https://registry.terraform.io/providers/Telmate/proxmox/)) replaces resources instead of updating them when making specific changes. As such, I'm not using this anymore.
 
-# terraform
+# proxmox_test
 
-## Overview
-Repo containing Terraform files.
+## Explanation
+
+Repo containing Terraform files for a test of Proxmox's IaC capabilities.
