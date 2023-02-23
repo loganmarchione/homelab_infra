@@ -8,7 +8,7 @@
   "labels": ["renovatebot"],
   "packageRules": [
     {
-      "managers": ["terraform"],
+      "managers": ["terraform", "tflint-plugin"],
       "matchUpdateTypes": ["patch"],
       "automerge": true,
       "automergeType": "pr",
