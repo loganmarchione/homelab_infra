@@ -16,9 +16,9 @@ provider "aws" {
 
 # This is needed because CloudFront can only use ACM certs generated in us-east-1
 provider "aws" {
+  alias                    = "us-east-1"
   region                   = "us-east-1"
   shared_credentials_files = ["/home/iac/.aws/credentials"]
-  alias                    = "us-east-1"
 
   default_tags {
     tags = {
