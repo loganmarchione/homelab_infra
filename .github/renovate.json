@@ -6,7 +6,13 @@
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
   "labels": ["renovatebot"],
-  "terraform": {
-    "ignorePaths": ["proxmox_homelab"]
-  }
+  "packageRules": [
+    {
+      "managers": ["terraform"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    }
+  ]
 }
