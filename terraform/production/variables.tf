@@ -2,7 +2,7 @@
 ### Common variables
 ###
 
-variable "logan_email" {
+variable "email_logan" {
   description = "Logan's email address (in secrets.tfvars)"
   sensitive   = true
   type        = string
