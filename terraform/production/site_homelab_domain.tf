@@ -3,7 +3,7 @@
 ###
 
 resource "aws_route53_zone" "homelab_domain" {
-  name = trimspace(base64decode(var.homelab_domain))
+  name = var.homelab_domain
 }
 
 resource "aws_route53_record" "homelab_domain_caa" {

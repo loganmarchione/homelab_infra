@@ -3,15 +3,13 @@
 ###
 
 variable "logan_email" {
-  default     = "bG9nYW5AbG9nYW5tYXJjaGlvbmUuY29tCg=="
-  description = "Logan's email address (obsfuscated a little so bots won't find it)"
+  description = "Logan's email address (in secrets.tfvars)"
   sensitive   = true
   type        = string
 }
 
 variable "homelab_domain" {
-  default     = "bG9nYW5tYXJjaGlvbmUueHl6"
-  description = "Homelab domain (obsfuscated a little so bots won't find it)"
+  description = "Homelab domain (in secrets.tfvars)"
   sensitive   = true
   type        = string
 }
@@ -27,30 +25,30 @@ variable "homelab_domain" {
 ###
 
 variable "do_token" {
-  description = "DigitalOcean API token"
-  type        = string
+  description = "DigitalOcean API token (in secrets.tfvars)"
   sensitive   = true
+  type        = string
 }
 
 # doctl compute image list --public
 variable "do_image" {
+  default     = "debian-11-x64"
   description = "Default OS image"
   type        = string
-  default     = "debian-11-x64"
 }
 
 # doctl compute region list
 variable "do_region" {
+  default     = "nyc3"
   description = "Default region"
   type        = string
-  default     = "nyc3"
 }
 
 # doctl compute size list
 # tflint-ignore: terraform_unused_declarations
 variable "do_size" {
+  default     = "s-1vcpu-2gb"
   description = "Default droplet size"
   type        = string
-  default     = "s-1vcpu-2gb"
 }
 
