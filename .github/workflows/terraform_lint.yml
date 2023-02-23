@@ -24,7 +24,6 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v3
 
-      steps:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -34,3 +33,11 @@ jobs:
         id: fmt
         run: terraform fmt -check
         continue-on-error: true
+
+      - name: Terraform init
+        id: init
+        run: terraform init
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate
