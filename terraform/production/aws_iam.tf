@@ -3,7 +3,6 @@
 ###
 
 # Create a policy to allow updating DNS records
-# TODO
 resource "aws_iam_policy" "acme_policy_certbot" {
   name        = "ACME_updater_certbot"
   path        = "/"
@@ -26,7 +25,6 @@ resource "aws_iam_policy" "acme_policy_certbot" {
   })
 }
 
-# TODO
 resource "aws_iam_policy" "acme_policy_lego" {
   name        = "ACME_updater_lego"
   path        = "/"
@@ -79,7 +77,6 @@ resource "aws_iam_user_policy_attachment" "attach_lego" {
 ### IAM billing access
 ###
 
-# TODO
 resource "aws_iam_policy" "billing_fullaccess_policy" {
   name        = "BillingFullAccess"
   path        = "/"
