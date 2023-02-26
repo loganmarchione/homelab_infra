@@ -15,11 +15,29 @@ resource "aws_iam_policy" "acme_policy_certbot" {
       {
         "Effect" : "Allow",
         "Action" : [
-          "route53:GetChange",
+          "route53:GetChange"
+        ],
+        "Resource" : "arn:aws:route53:::change/*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
           "route53:ListHostedZones",
-          "route53:ChangeResourceRecordSets"
+          "route53:ListHostedZonesByName"
         ],
         "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "route53:ChangeResourceRecordSets"
+        ],
+        "Resource" : "arn:aws:route53:::hostedzone/*",
+        "Condition" : {
+          "ForAllValues:StringEquals": {
+            "route53:ChangeResourceRecordSetsRecordTypes": ["TXT"]
+          }
+        }
       }
     ]
   })
@@ -38,7 +56,6 @@ resource "aws_iam_policy" "acme_policy_lego" {
         "Effect" : "Allow",
         "Action" : [
           "route53:GetChange",
-          "route53:ChangeResourceRecordSets",
           "route53:ListResourceRecordSets"
         ],
         "Resource" : [
@@ -49,9 +66,22 @@ resource "aws_iam_policy" "acme_policy_lego" {
       {
         "Effect" : "Allow",
         "Action" : [
+          "route53:ListHostedZones",
           "route53:ListHostedZonesByName"
         ],
         "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "route53:ChangeResourceRecordSets"
+        ],
+        "Resource" : "arn:aws:route53:::hostedzone/*",
+        "Condition" : {
+          "ForAllValues:StringEquals": {
+            "route53:ChangeResourceRecordSetsRecordTypes": ["TXT"]
+          }
+        }
       }
     ]
   })
