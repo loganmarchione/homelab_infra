@@ -34,8 +34,8 @@ resource "aws_iam_policy" "acme_policy_certbot" {
         ],
         "Resource" : "arn:aws:route53:::hostedzone/*",
         "Condition" : {
-          "ForAllValues:StringEquals": {
-            "route53:ChangeResourceRecordSetsRecordTypes": ["TXT"]
+          "ForAllValues:StringEquals" : {
+            "route53:ChangeResourceRecordSetsRecordTypes" : ["TXT"]
           }
         }
       }
@@ -78,8 +78,8 @@ resource "aws_iam_policy" "acme_policy_lego" {
         ],
         "Resource" : "arn:aws:route53:::hostedzone/*",
         "Condition" : {
-          "ForAllValues:StringEquals": {
-            "route53:ChangeResourceRecordSetsRecordTypes": ["TXT"]
+          "ForAllValues:StringEquals" : {
+            "route53:ChangeResourceRecordSetsRecordTypes" : ["TXT"]
           }
         }
       }
