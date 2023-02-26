@@ -119,7 +119,12 @@ resource "aws_iam_policy" "billing_fullaccess_policy" {
       {
         "Effect" : "Allow",
         "Action" : [
-          "aws-portal:*"
+          "billing:*",
+          "cur:*",
+          "freetier:*",
+          "invoicing:*",
+          "payments:*",
+          "tax:*"
         ],
         "Resource" : "*"
       }
