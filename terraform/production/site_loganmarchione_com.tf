@@ -156,6 +156,15 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "loganmarchione_co
   }
 }
 
+# Make sure the bucket is public
+resource "aws_s3_bucket_public_access_block" "loganmarchione_com_block" {
+  bucket                  = aws_s3_bucket.loganmarchione_com_resources.id
+  block_public_acls       = false
+  ignore_public_acls      = false
+  block_public_policy     = false
+  restrict_public_buckets = false
+}
+
 # Bucket lifecycle
 resource "aws_s3_bucket_lifecycle_configuration" "loganmarchione_com_resources_lifecycle" {
   bucket = aws_s3_bucket.loganmarchione_com_resources.id
