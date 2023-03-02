@@ -1,4 +1,4 @@
-resource "aws_budgets_budget" "cost_forecast_budget" {
+resource "aws_budgets_budget" "monthly_cost_forecast" {
   name              = "total-budget-monthly"
   budget_type       = "COST"
   limit_amount      = "5"

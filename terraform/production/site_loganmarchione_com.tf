@@ -63,7 +63,7 @@ resource "aws_route53_record" "loganmarchione_com_aaaa_www" {
   }
 }
 
-resource "aws_route53_record" "loganmarchione_com_fastmail_mx" {
+resource "aws_route53_record" "loganmarchione_com_mx_fastmail" {
   zone_id = aws_route53_zone.loganmarchione_com.zone_id
   name    = ""
   type    = "MX"
@@ -85,7 +85,7 @@ resource "aws_route53_record" "loganmarchione_com_txt" {
   ]
 }
 
-resource "aws_route53_record" "loganmarchione_com_fastmail_dkim1" {
+resource "aws_route53_record" "loganmarchione_com_cname_fastmail1" {
   zone_id = aws_route53_zone.loganmarchione_com.zone_id
   name    = "fm1._domainkey"
   type    = "CNAME"
@@ -95,7 +95,7 @@ resource "aws_route53_record" "loganmarchione_com_fastmail_dkim1" {
   ]
 }
 
-resource "aws_route53_record" "loganmarchione_com_fastmail_dkim2" {
+resource "aws_route53_record" "loganmarchione_com_cname_fastmail2" {
   zone_id = aws_route53_zone.loganmarchione_com.zone_id
   name    = "fm2._domainkey"
   type    = "CNAME"
@@ -105,7 +105,7 @@ resource "aws_route53_record" "loganmarchione_com_fastmail_dkim2" {
   ]
 }
 
-resource "aws_route53_record" "loganmarchione_com_fastmail_dkim3" {
+resource "aws_route53_record" "loganmarchione_com_cname_fastmail3" {
   zone_id = aws_route53_zone.loganmarchione_com.zone_id
   name    = "fm3._domainkey"
   type    = "CNAME"

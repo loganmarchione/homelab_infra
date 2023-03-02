@@ -3,7 +3,7 @@
 ################################################################################
 
 # Create a policy to allow updating DNS records
-resource "aws_iam_policy" "acme_policy" {
+resource "aws_iam_policy" "acme" {
   name        = "ACME_updater"
   path        = "/"
   description = "Policy to allow ACME updating TXT records"
@@ -48,21 +48,21 @@ resource "aws_iam_policy" "acme_policy" {
 }
 
 # Create IAM user
-resource "aws_iam_user" "acme_user" {
+resource "aws_iam_user" "acme" {
   name = "acme"
 }
 
 # Assign the policies created above to user
-resource "aws_iam_user_policy_attachment" "acme_policy" {
-  user       = aws_iam_user.acme_user.name
-  policy_arn = aws_iam_policy.acme_policy.arn
+resource "aws_iam_user_policy_attachment" "acme" {
+  user       = aws_iam_user.acme.name
+  policy_arn = aws_iam_policy.acme.arn
 }
 
 ################################################################################
 ### IAM billing access
 ################################################################################
 
-resource "aws_iam_policy" "billing_fullaccess_policy" {
+resource "aws_iam_policy" "billing_fullaccess" {
   name        = "BillingFullAccess"
   path        = "/"
   description = "Policy to allow read/write access to billing"
@@ -88,7 +88,7 @@ resource "aws_iam_policy" "billing_fullaccess_policy" {
 }
 
 # Assign the policy created above to user
-resource "aws_iam_user_policy_attachment" "iam_attach_billing_fullaccess_policy" {
+resource "aws_iam_user_policy_attachment" "billing_fullaccess" {
   user       = "logan"
-  policy_arn = aws_iam_policy.billing_fullaccess_policy.arn
+  policy_arn = aws_iam_policy.billing_fullaccess.arn
 }

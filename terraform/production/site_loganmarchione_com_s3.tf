@@ -12,13 +12,13 @@ resource "aws_s3_bucket" "loganmarchione_com_resources" {
 }
 
 # Make the bucket public
-resource "aws_s3_bucket_acl" "loganmarchione_com_resources_acl" {
+resource "aws_s3_bucket_acl" "loganmarchione_com_resources" {
   bucket = aws_s3_bucket.loganmarchione_com_resources.id
   acl    = "public-read"
 }
 
 # Enable bucket versioning
-resource "aws_s3_bucket_versioning" "loganmarchione_com_resources_versioning" {
+resource "aws_s3_bucket_versioning" "loganmarchione_com_resources" {
   bucket = aws_s3_bucket.loganmarchione_com_resources.id
   versioning_configuration {
     status = "Enabled"
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_versioning" "loganmarchione_com_resources_versioning" {
 }
 
 # Bucket encryption
-resource "aws_s3_bucket_server_side_encryption_configuration" "loganmarchione_com_resources_encryption" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "loganmarchione_com_resources" {
   bucket = aws_s3_bucket.loganmarchione_com_resources.bucket
 
   rule {
@@ -37,7 +37,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "loganmarchione_co
 }
 
 # Make sure the bucket is public
-resource "aws_s3_bucket_public_access_block" "loganmarchione_com_block" {
+resource "aws_s3_bucket_public_access_block" "loganmarchione_com_resources" {
   bucket                  = aws_s3_bucket.loganmarchione_com_resources.id
   block_public_acls       = false
   ignore_public_acls      = false
@@ -46,7 +46,7 @@ resource "aws_s3_bucket_public_access_block" "loganmarchione_com_block" {
 }
 
 # Bucket lifecycle
-resource "aws_s3_bucket_lifecycle_configuration" "loganmarchione_com_resources_lifecycle" {
+resource "aws_s3_bucket_lifecycle_configuration" "loganmarchione_com_resources" {
   bucket = aws_s3_bucket.loganmarchione_com_resources.id
 
   rule {
