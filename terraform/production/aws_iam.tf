@@ -1,4 +1,22 @@
 ################################################################################
+### Create users
+################################################################################
+
+# Create IAM user
+resource "aws_iam_user" "acme" {
+  name = "acme"
+}
+
+# Create IAM user
+resource "aws_iam_user" "postfixrelay" {
+  name = "postfixrelay"
+}
+
+resource "aws_iam_access_key" "postfixrelay" {
+  user = aws_iam_user.postfixrelay.name
+}
+
+################################################################################
 ### Route53+ACME
 ################################################################################
 
@@ -47,12 +65,7 @@ resource "aws_iam_policy" "acme" {
   })
 }
 
-# Create IAM user
-resource "aws_iam_user" "acme" {
-  name = "acme"
-}
-
-# Assign the policies created above to user
+# Assign the policy
 resource "aws_iam_user_policy_attachment" "acme" {
   user       = aws_iam_user.acme.name
   policy_arn = aws_iam_policy.acme.arn
@@ -87,7 +100,7 @@ resource "aws_iam_policy" "billing_fullaccess" {
   })
 }
 
-# Assign the policy created above to user
+# Assign the policy
 resource "aws_iam_user_policy_attachment" "billing_fullaccess" {
   user       = "logan"
   policy_arn = aws_iam_policy.billing_fullaccess.arn
