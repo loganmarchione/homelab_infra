@@ -39,7 +39,7 @@ resource "aws_route53_record" "loganmarchione_com_aaaa" {
   records = [digitalocean_droplet.web01.ipv6_address]
 }
 
-resource "aws_route53_record" "loganmarchione_com_www_a" {
+resource "aws_route53_record" "loganmarchione_com_a_www" {
   zone_id = aws_route53_zone.loganmarchione_com.zone_id
   name    = "www"
   type    = "A"
@@ -51,7 +51,7 @@ resource "aws_route53_record" "loganmarchione_com_www_a" {
   }
 }
 
-resource "aws_route53_record" "loganmarchione_com_www_aaaa" {
+resource "aws_route53_record" "loganmarchione_com_aaaa_www" {
   zone_id = aws_route53_zone.loganmarchione_com.zone_id
   name    = "www"
   type    = "AAAA"

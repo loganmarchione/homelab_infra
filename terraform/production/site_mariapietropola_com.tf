@@ -39,7 +39,7 @@ resource "aws_route53_record" "mariapietropola_com_aaaa" {
   records = [digitalocean_droplet.web02.ipv6_address]
 }
 
-resource "aws_route53_record" "mariapietropola_com_www_a" {
+resource "aws_route53_record" "mariapietropola_com_a_www" {
   zone_id = aws_route53_zone.mariapietropola_com.zone_id
   name    = "www"
   type    = "A"
@@ -51,7 +51,7 @@ resource "aws_route53_record" "mariapietropola_com_www_a" {
   }
 }
 
-resource "aws_route53_record" "mariapietropola_com_www_aaaa" {
+resource "aws_route53_record" "mariapietropola_com_aaaa_www" {
   zone_id = aws_route53_zone.mariapietropola_com.zone_id
   name    = "www"
   type    = "AAAA"
