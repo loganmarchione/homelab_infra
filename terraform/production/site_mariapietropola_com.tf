@@ -1,6 +1,10 @@
-###
+################################################################################
 ### DNS
-###
+################################################################################
+
+########################################
+### Zone and NS records
+########################################
 
 resource "aws_route53_zone" "mariapietropola_com" {
   name = "mariapietropola.com"
@@ -14,6 +18,10 @@ resource "aws_route53_record" "mariapietropola_com_nameservers" {
   allow_overwrite = true
   records         = aws_route53_zone.mariapietropola_com.name_servers
 }
+
+########################################
+### All other records
+########################################
 
 resource "aws_route53_record" "mariapietropola_com_a" {
   zone_id = aws_route53_zone.mariapietropola_com.zone_id

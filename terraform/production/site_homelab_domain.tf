@@ -1,6 +1,10 @@
-###
+################################################################################
 ### DNS
-###
+################################################################################
+
+########################################
+### Zone and NS records
+########################################
 
 resource "aws_route53_zone" "homelab_domain" {
   name = var.homelab_domain
@@ -14,6 +18,10 @@ resource "aws_route53_record" "homelab_domain_nameservers" {
   allow_overwrite = true
   records         = aws_route53_zone.homelab_domain.name_servers
 }
+
+########################################
+### All other records
+########################################
 
 resource "aws_route53_record" "homelab_domain_caa" {
   zone_id = aws_route53_zone.homelab_domain.zone_id

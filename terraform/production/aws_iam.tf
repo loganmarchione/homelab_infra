@@ -1,6 +1,6 @@
-###
+################################################################################
 ### Route53+ACME
-###
+################################################################################
 
 # Create a policy to allow updating DNS records
 resource "aws_iam_policy" "acme_policy_certbot" {
@@ -103,9 +103,9 @@ resource "aws_iam_user_policy_attachment" "attach_lego" {
   policy_arn = aws_iam_policy.acme_policy_lego.arn
 }
 
-###
+################################################################################
 ### IAM billing access
-###
+################################################################################
 
 resource "aws_iam_policy" "billing_fullaccess_policy" {
   name        = "BillingFullAccess"

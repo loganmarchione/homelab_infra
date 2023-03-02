@@ -1,11 +1,10 @@
-###
+################################################################################
 ### SES
-###
+################################################################################
 
-
-#
-# loganmarchione.com
-#
+########################################
+### loganmarchione.com
+########################################
 
 # Create the domain
 resource "aws_ses_domain_identity" "domain_identity" {
@@ -25,9 +24,9 @@ resource "aws_ses_domain_dkim" "domain_dkim" {
   domain = aws_ses_domain_identity.domain_identity.domain
 }
 
-#
-# homelab_domain
-#
+########################################
+### homelab_domain
+########################################
 
 # Create the domain
 resource "aws_ses_domain_identity" "domain_identity2" {
@@ -47,13 +46,13 @@ resource "aws_ses_domain_dkim" "domain_dkim2" {
   domain = aws_ses_domain_identity.domain_identity2.domain
 }
 
-###
+################################################################################
 ### DNS
-###
+################################################################################
 
-#
-# loganmarchione.com
-#
+########################################
+### loganmarchione.com
+########################################
 
 # Create DNS records for SES
 resource "aws_route53_record" "amazonses_verification" {
@@ -78,9 +77,9 @@ resource "aws_route53_record" "dkim_record" {
   count = 3
 }
 
-#
-# homelab_domain
-#
+########################################
+### homelab_domain
+########################################
 
 # Create DNS records for SES
 resource "aws_route53_record" "amazonses_verification2" {
