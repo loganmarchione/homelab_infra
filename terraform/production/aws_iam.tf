@@ -3,50 +3,10 @@
 ################################################################################
 
 # Create a policy to allow updating DNS records
-resource "aws_iam_policy" "acme_policy_certbot" {
-  name        = "ACME_updater_certbot"
+resource "aws_iam_policy" "acme_policy" {
+  name        = "ACME_updater"
   path        = "/"
-  description = "Policy to allow ACME updating for Certbot"
-
-  policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Id" : "ACME_updater",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "route53:GetChange"
-        ],
-        "Resource" : "arn:aws:route53:::change/*"
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "route53:ListHostedZones",
-          "route53:ListHostedZonesByName"
-        ],
-        "Resource" : "*"
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "route53:ChangeResourceRecordSets"
-        ],
-        "Resource" : "arn:aws:route53:::hostedzone/*",
-        "Condition" : {
-          "ForAllValues:StringEquals" : {
-            "route53:ChangeResourceRecordSetsRecordTypes" : ["TXT"]
-          }
-        }
-      }
-    ]
-  })
-}
-
-resource "aws_iam_policy" "acme_policy_lego" {
-  name        = "ACME_updater_lego"
-  path        = "/"
-  description = "Policy to allow ACME updating for LEGO (used by cert.sh mainly on pfSense)"
+  description = "Policy to allow ACME updating TXT records"
 
   policy = jsonencode({
     "Version" : "2012-10-17",
@@ -93,14 +53,9 @@ resource "aws_iam_user" "acme_user" {
 }
 
 # Assign the policies created above to user
-resource "aws_iam_user_policy_attachment" "attach_acme" {
+resource "aws_iam_user_policy_attachment" "acme_policy" {
   user       = aws_iam_user.acme_user.name
-  policy_arn = aws_iam_policy.acme_policy_certbot.arn
-}
-
-resource "aws_iam_user_policy_attachment" "attach_lego" {
-  user       = aws_iam_user.acme_user.name
-  policy_arn = aws_iam_policy.acme_policy_lego.arn
+  policy_arn = aws_iam_policy.acme_policy.arn
 }
 
 ################################################################################
