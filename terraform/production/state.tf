@@ -12,13 +12,13 @@ resource "aws_s3_bucket" "terraform_state" {
 }
 
 # Make the bucket private
-resource "aws_s3_bucket_acl" "terraform_state_acl" {
+resource "aws_s3_bucket_acl" "terraform_state" {
   bucket = aws_s3_bucket.terraform_state.id
   acl    = "private"
 }
 
 # Enable bucket versioning
-resource "aws_s3_bucket_versioning" "terraform_state_versioning" {
+resource "aws_s3_bucket_versioning" "terraform_state" {
   bucket = aws_s3_bucket.terraform_state.id
   versioning_configuration {
     status = "Enabled"
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_versioning" "terraform_state_versioning" {
 }
 
 # Bucket encryption
-resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state_encryption" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state" {
   bucket = aws_s3_bucket.terraform_state.bucket
 
   rule {
@@ -37,7 +37,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state_e
 }
 
 # Make sure the bucket is not public
-resource "aws_s3_bucket_public_access_block" "s3_terraform_state_block" {
+resource "aws_s3_bucket_public_access_block" "s3_terraform_state" {
   bucket                  = aws_s3_bucket.terraform_state.id
   block_public_acls       = true
   ignore_public_acls      = true
