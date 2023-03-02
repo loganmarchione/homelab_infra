@@ -17,6 +17,19 @@ Repo containing Terraform files that are currently being used, aka "production".
   * Already have their access keys recorded
   * AWS CLI is already setup
 
+After setup is complete, do the following:
+
+* Record access keys for the `acme` user
+  ```
+  terraform output acme_username
+  terraform output acme_password
+  ```
+* Record the SMTP username and password for the `postfixrelay` user
+  ```
+  terraform output postfixrelay_username
+  terraform output postfixrelay_password
+  ```
+
 ## DigitalOcean
 
 * An API key is already generated
