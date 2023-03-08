@@ -1,10 +1,11 @@
 ---
-name: Terraform Lint
+name: Lint
 
 on:
   push:
     paths:
       - 'terraform/**'
+  pull_request:
   schedule:
     - cron: "0 5 * * 0"
   workflow_dispatch:
@@ -14,8 +15,8 @@ defaults:
     working-directory: terraform/production
 
 jobs:
-  lint:
-    name: Lint
+  terraform_lint:
+    name: Terraform
 
     runs-on: ubuntu-latest
 
