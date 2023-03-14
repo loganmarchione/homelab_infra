@@ -24,6 +24,11 @@ After setup is complete, do the following:
   terraform output acme_username
   terraform output acme_password
   ```
+* Record access keys for the `dyndns` user
+  ```
+  terraform output dyndns_username
+  terraform output dyndns_password
+  ```
 * Record the SMTP username and password for the `postfixrelay` user
   ```
   terraform output postfixrelay_username
