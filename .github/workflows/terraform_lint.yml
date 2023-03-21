@@ -52,3 +52,17 @@ jobs:
 
       - name: TFLint validate
         run: tflint
+
+  terraform_scan:
+    name: Terraform Scan
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+
+      - name: Run Terrascan
+        uses: tenable/terrascan-action@main
+        with:
+          iac_type: 'terraform'
