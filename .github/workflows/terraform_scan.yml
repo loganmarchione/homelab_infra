@@ -30,7 +30,7 @@ jobs:
           iac_type: 'terraform'
           iac_dir: ./terraform
 
-      - name: KICS Github Action
+      - name: Run KICS
         uses: Checkmarx/kics-github-action@v1.6
         with:
-           path: '.'
+           path: './terraform'
