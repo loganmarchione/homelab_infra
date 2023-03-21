@@ -24,11 +24,15 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v3
 
+      - name: Test
+        run: ls -la
+
       - name: Run Terrascan
         uses: tenable/terrascan-action@main
         with:
           iac_type: 'terraform'
           iac_dir: ./terraform
+          config_path: ./github/terrascan.toml
 
       - name: Run KICS
         uses: Checkmarx/kics-github-action@v1.6
