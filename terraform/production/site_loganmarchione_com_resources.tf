@@ -82,11 +82,11 @@ resource "aws_cloudfront_distribution" "loganmarchione_com_resources" {
     origin_id                = local.s3_origin_id
   }
 
-  comment             = local.s3_origin_id
-  enabled             = true
-  http_version        = "http2"
-  is_ipv6_enabled     = true
-  price_class         = "PriceClass_100"
+  comment         = local.s3_origin_id
+  enabled         = true
+  http_version    = "http2"
+  is_ipv6_enabled = true
+  price_class     = "PriceClass_100"
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
