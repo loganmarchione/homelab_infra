@@ -31,8 +31,7 @@ jobs:
         uses: tenable/terrascan-action@main
         with:
           iac_type: 'terraform'
-          iac_dir: ./terraform
-          config_path: ./github/terrascan.toml
+          config_path: ./.terrascan.toml
 
       - name: Run KICS
         uses: Checkmarx/kics-github-action@v1.6
