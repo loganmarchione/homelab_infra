@@ -33,7 +33,7 @@ jobs:
           non_recursive: true      
 
       - name: Run KICS
-        uses: Checkmarx/kics-github-action@v1.6
+        uses: Checkmarx/kics-github-action@v1.6.3
         with:
            path: ./terraform/production
            fail_on: high
