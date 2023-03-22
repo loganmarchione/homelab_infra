@@ -131,7 +131,7 @@ resource "aws_s3_bucket_policy" "loganmarchione_com_resources" {
         "Resource" : "${aws_s3_bucket.loganmarchione_com_resources.arn}/*",
         "Condition" : {
           "StringEquals" : {
-            "AWS:SourceArn" : "${aws_cloudfront_distribution.loganmarchione_com_resources.arn}"
+            "AWS:SourceArn" : aws_cloudfront_distribution.loganmarchione_com_resources.arn
           }
         }
       }
