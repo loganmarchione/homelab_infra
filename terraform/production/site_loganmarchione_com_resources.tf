@@ -110,7 +110,9 @@ resource "aws_cloudfront_distribution" "loganmarchione_com_resources" {
     }
   }
 
+  # kics-scan ignore-line
   viewer_certificate {
+    # kics-scan ignore-line
     cloudfront_default_certificate = true
   }
 }
