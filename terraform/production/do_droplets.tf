@@ -27,13 +27,3 @@ resource "digitalocean_droplet" "web02" {
     ignore_changes  = [image]
   }
 }
-
-# Print IP address
-output "droplet_ip_address_web01" {
-  value = digitalocean_droplet.web01.ipv4_address
-}
-
-# Print IP address
-output "droplet_ip_address_web02" {
-  value = digitalocean_droplet.web02.ipv4_address
-}
