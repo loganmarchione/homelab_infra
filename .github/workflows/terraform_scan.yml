@@ -15,8 +15,8 @@ defaults:
     working-directory: terraform/production
 
 jobs:
-  terraform_scan:
-    name: Terraform Scan
+  terrascan:
+    name: Terrascan
 
     runs-on: ubuntu-latest
 
@@ -31,6 +31,15 @@ jobs:
           iac_dir: ./terraform/production
           config_path: ./terraform/production/.terrascan.toml
           non_recursive: true      
+
+  kics:
+    name: KICS
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3 
 
       - name: Run KICS
         uses: Checkmarx/kics-github-action@v1.6.3
