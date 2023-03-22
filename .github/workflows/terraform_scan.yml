@@ -33,6 +33,8 @@ jobs:
           iac_type: 'terraform'
           config_path: ./terraform/production/.terrascan.toml
           non_recursive: true
+          iac_dir: ./terraform/production
+          
 
       - name: Run KICS
         uses: Checkmarx/kics-github-action@v1.6
