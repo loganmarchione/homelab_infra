@@ -138,6 +138,18 @@ resource "aws_s3_bucket_policy" "loganmarchione_com_resources" {
             "AWS:SourceArn" : aws_cloudfront_distribution.loganmarchione_com_resources.arn
           }
         }
+      },
+      {
+        "Sid" : "AllowSSLRequestsOnly",
+        "Effect" : "Deny",
+        "Principal" : "*"
+        "Action" : "s3:GetObject",
+        "Resource" : "${aws_s3_bucket.loganmarchione_com_resources.arn}/*",
+        "Condition" : {
+          "Bool" : {
+            "aws:SecureTransport" : "false"
+          }
+        }
       }
     ]
   })
