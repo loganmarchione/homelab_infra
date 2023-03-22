@@ -16,15 +16,15 @@ resource "aws_iam_access_key" "acme" {
 }
 
 output "acme_username" {
-  value     = aws_iam_access_key.acme.id
+  value       = aws_iam_access_key.acme.id
   description = "ACME username"
-  sensitive = true
+  sensitive   = true
 }
 
 output "acme_password" {
-  value     = aws_iam_access_key.acme.secret
+  value       = aws_iam_access_key.acme.secret
   description = "ACME password"
-  sensitive = true
+  sensitive   = true
 }
 
 ################################################################################

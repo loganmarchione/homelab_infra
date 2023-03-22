@@ -16,15 +16,15 @@ resource "aws_iam_access_key" "dyndns" {
 }
 
 output "dyndns_username" {
-  value     = aws_iam_access_key.dyndns.id
+  value       = aws_iam_access_key.dyndns.id
   description = "DynDNS username"
-  sensitive = true
+  sensitive   = true
 }
 
 output "dyndns_password" {
-  value     = aws_iam_access_key.dyndns.secret
+  value       = aws_iam_access_key.dyndns.secret
   description = "DynDNS password"
-  sensitive = true
+  sensitive   = true
 }
 
 ################################################################################
