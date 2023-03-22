@@ -27,6 +27,7 @@ resource "aws_s3_bucket_versioning" "terraform_state" {
 
 # Bucket encryption
 resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state" {
+  #ts:skip=AWS.S3Bucket.EncryptionandKeyManagement.High.0405 Bucket is already encrypted but not with KMS
   bucket = aws_s3_bucket.terraform_state.bucket
 
   rule {
