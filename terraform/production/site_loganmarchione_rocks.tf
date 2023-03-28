@@ -74,6 +74,14 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "loganmarchione_ro
   }
 }
 
+# Enable bucket logging
+resource "aws_s3_bucket_logging" "loganmarchione_rocks" {
+  bucket = aws_s3_bucket.loganmarchione_rocks.id
+
+  target_bucket = aws_s3_bucket.loganmarchione_logging.id
+  target_prefix = "s3_${aws_s3_bucket.loganmarchione_rocks.id}/"
+}
+
 # Make sure the bucket is not public
 resource "aws_s3_bucket_public_access_block" "loganmarchione_rocks" {
   bucket                  = aws_s3_bucket.loganmarchione_rocks.id
@@ -186,6 +194,12 @@ resource "aws_cloudfront_distribution" "loganmarchione_rocks" {
     }
 
     viewer_protocol_policy = "redirect-to-https"
+  }
+
+  logging_config {
+    include_cookies = false
+    bucket          = aws_s3_bucket.loganmarchione_logging.bucket_domain_name
+    prefix          = "cloudfront_${local.s3_origin_id_loganmarchione_rocks}/"
   }
 
   restrictions {

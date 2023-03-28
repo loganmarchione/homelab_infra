@@ -38,6 +38,14 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state" 
   }
 }
 
+# Enable bucket logging
+resource "aws_s3_bucket_logging" "terraform_state" {
+  bucket = aws_s3_bucket.terraform_state.id
+
+  target_bucket = aws_s3_bucket.loganmarchione_logging.id
+  target_prefix = "s3_${aws_s3_bucket.terraform_state.id}/"
+}
+
 # Make sure the bucket is not public
 resource "aws_s3_bucket_public_access_block" "s3_terraform_state" {
   bucket                  = aws_s3_bucket.terraform_state.id
