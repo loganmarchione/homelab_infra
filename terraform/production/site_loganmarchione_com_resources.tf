@@ -74,17 +74,17 @@ resource "aws_cloudfront_origin_access_control" "loganmarchione_com_resources" {
 }
 
 locals {
-  s3_origin_id = "loganmarchione_com_resources"
+  s3_origin_id_loganmarchione_com = "loganmarchione_com_resources"
 }
 
 resource "aws_cloudfront_distribution" "loganmarchione_com_resources" {
   origin {
     domain_name              = aws_s3_bucket.loganmarchione_com_resources.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.loganmarchione_com_resources.id
-    origin_id                = local.s3_origin_id
+    origin_id                = local.s3_origin_id_loganmarchione_com
   }
 
-  comment         = local.s3_origin_id
+  comment         = local.s3_origin_id_loganmarchione_com
   enabled         = true
   http_version    = "http2"
   is_ipv6_enabled = true
@@ -93,7 +93,7 @@ resource "aws_cloudfront_distribution" "loganmarchione_com_resources" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = local.s3_origin_id
+    target_origin_id = local.s3_origin_id_loganmarchione_com
 
     forwarded_values {
       query_string = false
