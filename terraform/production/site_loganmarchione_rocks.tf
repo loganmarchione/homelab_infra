@@ -197,7 +197,7 @@ resource "aws_cloudfront_distribution" "loganmarchione_rocks" {
   viewer_certificate {
     acm_certificate_arn      = aws_acm_certificate.loganmarchione_rocks.arn
     ssl_support_method       = "sni-only"
-    minimum_protocol_version = "TLSv1.2_2019"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 
