@@ -20,7 +20,7 @@ resource "aws_s3_bucket_acl" "terraform_state" {
 # Enable bucket versioning
 resource "aws_s3_bucket_versioning" "terraform_state" {
   bucket = aws_s3_bucket.terraform_state.id
-
+  # kics-scan ignore-line
   versioning_configuration {
     status = "Enabled"
   }

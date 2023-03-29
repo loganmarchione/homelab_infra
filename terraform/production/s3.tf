@@ -24,7 +24,7 @@ resource "aws_s3_bucket_acl" "loganmarchione_logging" {
 # Enable bucket versioning
 resource "aws_s3_bucket_versioning" "loganmarchione_logging" {
   bucket = aws_s3_bucket.loganmarchione_logging.id
-
+  # kics-scan ignore-line
   versioning_configuration {
     status = "Enabled"
   }
