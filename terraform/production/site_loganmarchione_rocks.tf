@@ -56,9 +56,7 @@ resource "aws_s3_bucket_acl" "loganmarchione_rocks" {
 # Enable bucket versioning
 resource "aws_s3_bucket_versioning" "loganmarchione_rocks" {
   bucket = aws_s3_bucket.loganmarchione_rocks.id
-  # Ignore KICS scan: S3 Bucket Without Enabled MFA Delete
-  # Reason: Don't want MFA delete
-  # kics-scan ignore-line
+
   versioning_configuration {
     status = "Enabled"
   }
