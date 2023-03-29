@@ -31,7 +31,6 @@ jobs:
           iac_dir: ./terraform/production
           config_path: ./terraform/production/.terrascan.toml
           non_recursive: true
-          skip_rules: "AC_AWS_0207"
 
   kics:
     name: KICS
@@ -61,4 +60,4 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
           soft_fail: true
-          additional_args: --exclude aws-s3-encryption-customer-key
+          additional_args: --config-file .tfsec.yml
