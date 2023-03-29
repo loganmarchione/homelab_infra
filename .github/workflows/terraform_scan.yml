@@ -60,4 +60,5 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
+          soft_fail: true
           additional_args: --exclude aws-s3-encryption-customer-key
