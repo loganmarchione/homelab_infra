@@ -56,8 +56,9 @@ resource "aws_s3_bucket_acl" "loganmarchione_rocks" {
 # Enable bucket versioning
 resource "aws_s3_bucket_versioning" "loganmarchione_rocks" {
   bucket = aws_s3_bucket.loganmarchione_rocks.id
-  # S3 Bucket Without Enabled MFA Delete
-  # kics-scan disable=c5b31ab9-0f26-4a49-b8aa-4cc064392f4d
+  # Ignore KICS scan: S3 Bucket Without Enabled MFA Delete
+  # Reason: Don't want MFA delete
+  # kics-scan ignore-line
   versioning_configuration {
     status = "Enabled"
   }
@@ -168,6 +169,7 @@ locals {
   s3_origin_id_loganmarchione_rocks = "loganmarchione_rocks"
 }
 
+#tfsec:ignore:aws-cloudfront-enable-waf
 resource "aws_cloudfront_distribution" "loganmarchione_rocks" {
   origin {
     domain_name              = aws_s3_bucket.loganmarchione_rocks.bucket_regional_domain_name

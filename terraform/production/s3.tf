@@ -7,6 +7,9 @@
 ########################################
 
 # Create a bucket
+# Ignore KICS scan: S3 Bucket Logging Disabled
+# Reason: This bucket is the logging bucket
+# kics-scan ignore-line
 resource "aws_s3_bucket" "loganmarchione_logging" {
   bucket = "loganmarchione-logging"
 
@@ -24,8 +27,9 @@ resource "aws_s3_bucket_acl" "loganmarchione_logging" {
 # Enable bucket versioning
 resource "aws_s3_bucket_versioning" "loganmarchione_logging" {
   bucket = aws_s3_bucket.loganmarchione_logging.id
-  # S3 Bucket Without Enabled MFA Delete
-  # kics-scan disable=c5b31ab9-0f26-4a49-b8aa-4cc064392f4d
+  # Ignore KICS scan: S3 Bucket Without Enabled MFA Delete
+  # Reason: Don't want MFA delete
+  # kics-scan ignore-line
   versioning_configuration {
     status = "Enabled"
   }
