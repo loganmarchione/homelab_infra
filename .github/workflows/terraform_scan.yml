@@ -31,7 +31,7 @@ jobs:
           iac_dir: ./terraform/production
           config_path: ./terraform/production/.terrascan.toml
           non_recursive: true
-          skip_rules: AWS.S3Bucket.EncryptionandKeyManagement.High.0405
+          skip_rules: "AWS.S3Bucket.EncryptionandKeyManagement.High.0405"
 
   kics:
     name: KICS
