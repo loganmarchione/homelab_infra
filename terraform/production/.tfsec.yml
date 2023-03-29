@@ -1,4 +1,6 @@
 ---
 exclude:
-  - aws-s3-encryption-customer-key
+  - aws-cloudfront-enable-waf
   - aws-iam-no-policy-wildcards
+  - aws-s3-encryption-customer-key
+  - digitalocean-compute-use-ssh-keys
