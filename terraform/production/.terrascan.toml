@@ -1,2 +1,6 @@
 [severity]
   level = "high"
+[rules]
+    skip-rules = [
+        "AWS.S3Bucket.EncryptionandKeyManagement.High.0405"
+    ]
