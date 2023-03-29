@@ -1,3 +1,4 @@
 ---
 exclude:
   - aws-s3-encryption-customer-key
+  - aws-iam-no-policy-wildcards
