@@ -60,6 +60,5 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          soft_fail: true
           working_directory: ./terraform/production
           additional_args: --config-file ./terraform/production/.tfsec.yml
