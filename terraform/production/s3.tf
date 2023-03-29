@@ -37,7 +37,6 @@ resource "aws_s3_bucket_versioning" "loganmarchione_logging" {
 
 # Bucket encryption
 resource "aws_s3_bucket_server_side_encryption_configuration" "loganmarchione_logging" {
-  #ts:skip=AWS.S3Bucket.EncryptionandKeyManagement.High.0405 Bucket is already encrypted but not with KMS
   bucket = aws_s3_bucket.loganmarchione_logging.bucket
 
   rule {
