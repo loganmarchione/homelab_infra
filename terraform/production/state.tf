@@ -20,7 +20,8 @@ resource "aws_s3_bucket_acl" "terraform_state" {
 # Enable bucket versioning
 resource "aws_s3_bucket_versioning" "terraform_state" {
   bucket = aws_s3_bucket.terraform_state.id
-  # kics-scan ignore-line
+  # S3 Bucket Without Enabled MFA Delete
+  # kics-scan disable=c5b31ab9-0f26-4a49-b8aa-4cc064392f4d
   versioning_configuration {
     status = "Enabled"
   }
