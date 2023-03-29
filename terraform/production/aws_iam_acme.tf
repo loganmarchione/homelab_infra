@@ -6,7 +6,6 @@
 ### Create user
 ########################################
 
-# Create IAM user for ACME
 resource "aws_iam_user" "acme" {
   name = "acme"
 }
@@ -15,23 +14,27 @@ resource "aws_iam_access_key" "acme" {
   user = aws_iam_user.acme.name
 }
 
-output "acme_username" {
-  value       = aws_iam_access_key.acme.id
-  description = "ACME username"
-  sensitive   = true
+########################################
+### Create group
+########################################
+
+resource "aws_iam_group" "acme" {
+  name = "acme"
+  path = "/users/"
 }
 
-output "acme_password" {
-  value       = aws_iam_access_key.acme.secret
-  description = "ACME password"
-  sensitive   = true
+resource "aws_iam_user_group_membership" "acme" {
+  user = aws_iam_user.acme.name
+
+  groups = [
+    aws_iam_group.acme.name
+  ]
 }
 
 ################################################################################
 ### Policy
 ################################################################################
 
-# Create a policy to allow updating DNS records
 resource "aws_iam_policy" "acme" {
   name        = "ACME_updater"
   path        = "/"
@@ -76,8 +79,7 @@ resource "aws_iam_policy" "acme" {
   })
 }
 
-# Assign the policy
-resource "aws_iam_user_policy_attachment" "acme" {
-  user       = aws_iam_user.acme.name
+resource "aws_iam_group_policy_attachment" "acme" {
+  group      = aws_iam_group.acme.name
   policy_arn = aws_iam_policy.acme.arn
 }

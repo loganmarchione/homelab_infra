@@ -15,18 +15,7 @@ resource "aws_iam_access_key" "postfixrelay" {
   user = aws_iam_user.postfixrelay.name
 }
 
-output "postfixrelay_username" {
-  value       = aws_iam_access_key.postfixrelay.id
-  description = "SES username"
-  sensitive   = true
-}
 
-# Need to get the SES SMTP password instead of the access key
-output "postfixrelay_password" {
-  value       = aws_iam_access_key.postfixrelay.ses_smtp_password_v4
-  description = "SES password"
-  sensitive   = true
-}
 
 ################################################################################
 ### Policy
