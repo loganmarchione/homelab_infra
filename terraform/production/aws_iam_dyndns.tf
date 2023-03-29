@@ -6,7 +6,6 @@
 ### Create user
 ########################################
 
-# Create IAM user for Dynamic DNS
 resource "aws_iam_user" "dyndns" {
   name = "dyndns"
 }
@@ -15,11 +14,27 @@ resource "aws_iam_access_key" "dyndns" {
   user = aws_iam_user.dyndns.name
 }
 
+########################################
+### Create group
+########################################
+
+resource "aws_iam_group" "dyndns" {
+  name = "dyndns"
+  path = "/users/"
+}
+
+resource "aws_iam_user_group_membership" "dyndns" {
+  user = aws_iam_user.dyndns.name
+
+  groups = [
+    aws_iam_group.dyndns.name
+  ]
+}
+
 ################################################################################
 ### Policy
 ################################################################################
 
-# Create a policy to allow updating DNS records
 resource "aws_iam_policy" "dyndns" {
   name        = "dyndns_updater"
   path        = "/"
@@ -46,8 +61,7 @@ resource "aws_iam_policy" "dyndns" {
   })
 }
 
-# Assign the policy
-resource "aws_iam_user_policy_attachment" "dyndns" {
-  user       = aws_iam_user.dyndns.name
+resource "aws_iam_group_policy_attachment" "dyndns" {
+  group      = aws_iam_group.dyndns.name
   policy_arn = aws_iam_policy.dyndns.arn
 }

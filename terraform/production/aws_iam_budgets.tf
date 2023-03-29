@@ -2,6 +2,27 @@
 ### IAM billing access
 ################################################################################
 
+########################################
+### Create group
+########################################
+
+resource "aws_iam_group" "logan" {
+  name = "logan"
+  path = "/users/"
+}
+
+resource "aws_iam_user_group_membership" "logan" {
+  user = "logan"
+
+  groups = [
+    aws_iam_group.logan.name
+  ]
+}
+
+################################################################################
+### Policy
+################################################################################
+
 resource "aws_iam_policy" "billing_fullaccess" {
   name        = "BillingFullAccess"
   path        = "/"
@@ -27,8 +48,7 @@ resource "aws_iam_policy" "billing_fullaccess" {
   })
 }
 
-# Assign the policy
-resource "aws_iam_user_policy_attachment" "billing_fullaccess" {
-  user       = "logan"
+resource "aws_iam_group_policy_attachment" "logan" {
+  group      = aws_iam_group.logan.name
   policy_arn = aws_iam_policy.billing_fullaccess.arn
 }
