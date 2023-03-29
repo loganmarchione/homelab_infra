@@ -30,7 +30,6 @@ jobs:
           iac_type: 'terraform'
           iac_dir: ./terraform/production
           config_path: ./terraform/production/.terrascan.toml
-          non_recursive: true
           verbose: true
 
   kics:
@@ -46,7 +45,7 @@ jobs:
         uses: Checkmarx/kics-github-action@v1.6.3
         with:
            path: ./terraform/production
-           fail_on: high
+           config_path: ./terraform/production/.kics.yml
 
   tfsec:
     name: tfsec
