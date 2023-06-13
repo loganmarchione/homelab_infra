@@ -80,7 +80,7 @@ resource "aws_route53_record" "loganmarchione_com_txt" {
   type    = "TXT"
   ttl     = "3600"
   records = [
-    "v=spf1 include:spf.messagingengine.com ?all",
+    "v=spf1 include:spf.messagingengine.com ~all",
     "brave-ledger-verification=da1b68a7f01cb62d91c8f3613d1b3ac854a07a2bd376ca38259c0f7834f4f7f9"
   ]
 }
