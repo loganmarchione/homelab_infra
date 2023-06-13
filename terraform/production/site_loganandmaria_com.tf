@@ -78,6 +78,16 @@ resource "aws_route53_record" "loganandmaria_com_mx_google" {
   ]
 }
 
+resource "aws_route53_record" "loganandmaria_com_txt" {
+  zone_id = aws_route53_zone.loganandmaria_com.zone_id
+  name    = ""
+  type    = "TXT"
+  ttl     = "3600"
+  records = [
+    "v=spf1 include:_spf.google.com ~all"
+  ]
+}
+
 resource "aws_route53_record" "loganandmaria_com_caa" {
   zone_id = aws_route53_zone.loganandmaria_com.zone_id
   name    = ""
