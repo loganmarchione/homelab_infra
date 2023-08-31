@@ -14,7 +14,7 @@ provider "aws" {
   }
 }
 
-# This is needed because CloudFront can only use ACM certs generated in us-east-1
+# Needed because CloudFront can only use ACM certs generated in us-east-1
 provider "aws" {
   alias                    = "us-east-1"
   region                   = "us-east-1"
@@ -22,7 +22,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      terraform = "true"
+      ManagedBy = "Terraform"
     }
   }
 }
