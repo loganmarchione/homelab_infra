@@ -6,25 +6,25 @@
 ### Zone and NS records
 ########################################
 
-resource "aws_route53_zone" "this" {
-  name = var.this_name
+resource "aws_route53_zone" "site" {
+  name = var.site_name
 }
 
-resource "aws_route53_record" "this_nameservers" {
-  zone_id         = aws_route53_zone.this.zone_id
-  name            = aws_route53_zone.this.name
+resource "aws_route53_record" "site_nameservers" {
+  zone_id         = aws_route53_zone.site.zone_id
+  name            = aws_route53_zone.site.name
   type            = "NS"
   ttl             = "3600"
   allow_overwrite = true
-  records         = aws_route53_zone.this.name_servers
+  records         = aws_route53_zone.site.name_servers
 }
 
 ########################################
 ### All other records
 ########################################
 
-resource "aws_route53_record" "this_caa" {
-  zone_id = aws_route53_zone.this.zone_id
+resource "aws_route53_record" "site_caa" {
+  zone_id = aws_route53_zone.site.zone_id
   name    = ""
   type    = "CAA"
   ttl     = "3600"
