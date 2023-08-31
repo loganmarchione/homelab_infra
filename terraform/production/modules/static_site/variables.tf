@@ -9,7 +9,7 @@ variable "bucket_name" {
       length(var.bucket_name) <= 63 &&
       can(regex("^[a-z0-9][a-z0-9-]*[a-z0-9]$", var.bucket_name))
     )
-    error_message = "S3 bucket name contains invalid characters"
+    error_message = "S3 bucket name contains invalid characters."
   }
 }
 
@@ -20,7 +20,7 @@ variable "bucket_versioning" {
 
   validation {
     condition     = contains(["Enabled", "Suspended", "Disabled"], var.bucket_versioning)
-    error_message = "Variable must be 'Enabled', 'Suspended', or 'Disabled'"
+    error_message = "Variable must be 'Enabled', 'Suspended', or 'Disabled'."
   }
 }
 
