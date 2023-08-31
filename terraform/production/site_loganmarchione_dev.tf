@@ -1,5 +1,5 @@
 module "static_site_loganmarchione_dev" {
-  source = "./modules/static_site"
+  source = "../modules/static_site"
 
   # The apex name of the site and the name of the S3 bucket to store the static files
   site_name   = "loganmarchione.dev"
