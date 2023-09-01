@@ -18,13 +18,58 @@ variable "bucket_versioning" {
   description = "State of bucket versioning"
   type        = string
 
+  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning#status
   validation {
     condition     = contains(["Enabled", "Suspended", "Disabled"], var.bucket_versioning)
     error_message = "Variable must be 'Enabled', 'Suspended', or 'Disabled'."
   }
 }
 
+variable "cloudfront_enabled" {
+  default     = true
+  description = "To enable CloudFront or not"
+  type        = bool
+}
+
+variable "cloudfront_http_version" {
+  default     = "http2"
+  description = "The CloudFront HTTP version"
+  type        = string
+}
+
+variable "cloudfront_ipv6" {
+  default     = true
+  description = "To enable IPv6 or not"
+  type        = bool
+}
+
+variable "cloudfront_price_class" {
+  default     = "PriceClass_100"
+  description = "The CloudFront price class"
+  type        = string
+
+  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution#price_class
+  # https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html
+  validation {
+    condition     = contains(["PriceClass_All", "PriceClass_200", "PriceClass_100"], var.cloudfront_price_class)
+    error_message = "Variable must be 'PriceClass_All', 'PriceClass_200', or 'PriceClass_100'."
+  }
+}
+
+variable "cloudfront_ssl_minimum_protocol_version" {
+  default = "TLSv1.2_2021"
+  # https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
+  description = "The minimum SSL protocol to use"
+  type        = string
+}
+
 variable "site_name" {
   description = "Name of the site (e.g., example.com)"
   type        = string
+}
+
+variable "test_page" {
+  default     = true
+  description = "To push a test index.html page to the S3 bucket or not"
+  type        = bool
 }

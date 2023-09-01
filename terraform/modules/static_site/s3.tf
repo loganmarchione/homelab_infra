@@ -54,6 +54,16 @@ resource "aws_s3_bucket_logging" "site" {
   depends_on = [aws_s3_bucket.logging]
 }
 
+# Upload a test page (if enabled)
+resource "aws_s3_object" "site" {
+  count        = var.test_page ? 1 : 0
+  bucket       = aws_s3_bucket.site.id
+  key          = "index.html"
+  source       = "${path.module}/index.html"
+  content_type = "text/html"
+  etag         = filemd5("${path.module}/index.html")
+}
+
 ########################################
 ### Logging bucket
 ########################################
@@ -96,16 +106,42 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "logging" {
   }
 }
 
+# Set ownership controls
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls#rule-configuration-block
+# https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+resource "aws_s3_bucket_ownership_controls" "logging" {
+  bucket = aws_s3_bucket.logging.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+# Setup bucket ACL
+# https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#AccessLogsBucketAndFileOwnership
+resource "aws_s3_bucket_acl" "logging" {
+  bucket = aws_s3_bucket.logging.id
+  acl    = "log-delivery-write"
+}
+
 # Bucket lifecycle
 resource "aws_s3_bucket_lifecycle_configuration" "logging" {
   bucket = aws_s3_bucket.logging.id
 
   rule {
-    id     = "30d_move_to_S3_IA"
+    id     = "move_files_to_IA"
     status = "Enabled"
     transition {
       days          = 30
       storage_class = "STANDARD_IA"
+    }
+  }
+
+  rule {
+    id     = "prune_old_files"
+    status = "Enabled"
+    expiration {
+      days = 365
     }
   }
 }
