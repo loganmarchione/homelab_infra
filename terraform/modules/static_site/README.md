@@ -11,4 +11,17 @@ An opinionated Terraform module to create a static site:
 * Creates an ACM certificate for `site_name.tld` and `*.site_name.tld` (i.e., for subdomains like `www.site_name.tld`)
 * Validates the ACM certificate using Route53 DNS
 * Creates A and AAAA records for `site_name.tld` and `www.site_name.tld`
-* Sane defaults for HTTP headers
+* CloudFront distribution using Origin Access Control to S3
+* CloudFront options for IPv6, TLS, HTTP versions, and more
+* Sane defaults for CloudFront HTTP headers
+
+## Caveats
+
+The ACM validation **WILL FAIL** until you point your domain's nameservers to the nameservers provided by Route53. You should do this:
+
+1. Run `terraform apply`
+1. Wait for ACM validation to timeout (the default is 5min in Terraform)
+1. Go into Route53 and find the four nameservers
+1. Add the Route53 nameservers to your domain's control panel
+1. Wait 5 minutes
+1. Re-run `terraform apply`
