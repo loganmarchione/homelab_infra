@@ -76,10 +76,9 @@ resource "aws_cloudfront_distribution" "site" {
       override = true
     }
 
-    xss_protection {
-      mode_block = true
+    referrer_policy {
       override = true
-      protection = true
+      referrer_policy = "strict-origin-when-cross-origin"
     }
 
     strict_transport_security {
@@ -88,6 +87,13 @@ resource "aws_cloudfront_distribution" "site" {
       override = true
       preload = true
     }
+
+    xss_protection {
+      mode_block = true
+      override = true
+      protection = true
+    }
+
   }
 }
 
