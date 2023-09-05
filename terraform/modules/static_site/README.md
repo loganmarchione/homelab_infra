@@ -8,5 +8,7 @@ An opinionated Terraform module to create a static site:
 * S3 buckets are private
 * Logs move to Standard IA after 30 days and are expired after 365
 * Site files (e.g., HTML, CSS, etc...) can only be accessed through CloudFront (i.e., no direct access to files in S3)
-* Creates an ACM certificate for `site_name` and `*.site_name` (i.e., for subdomains like `www.site_name`)
+* Creates an ACM certificate for `site_name.tld` and `*.site_name.tld` (i.e., for subdomains like `www.site_name.tld`)
 * Validates the ACM certificate using Route53 DNS
+* Creates A and AAAA records for `site_name.tld` and `www.site_name.tld`
+* Sane defaults for HTTP headers

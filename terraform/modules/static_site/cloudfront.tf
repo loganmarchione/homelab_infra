@@ -1,5 +1,5 @@
 ################################################################################
-### CloudFront + DNS
+### CloudFront
 ################################################################################
 
 resource "aws_cloudfront_origin_access_control" "site" {
@@ -41,6 +41,7 @@ resource "aws_cloudfront_distribution" "site" {
       }
     }
 
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.site.id
     viewer_protocol_policy = "redirect-to-https"
   }
 
@@ -62,6 +63,78 @@ resource "aws_cloudfront_distribution" "site" {
     minimum_protocol_version = var.cloudfront_ssl_minimum_protocol_version
   }
 }
+
+ resource "aws_cloudfront_response_headers_policy" "site" {
+  name = "sane_defaults"
+  security_headers_config {
+    content_type_options {
+      override = true
+    }
+
+    frame_options {
+      frame_option = "SAMEORIGIN"
+      override = true
+    }
+
+    xss_protection {
+      mode_block = true
+      override = true
+      protection = true
+    }
+
+    strict_transport_security {
+      access_control_max_age_sec = "31536000"
+      include_subdomains = true
+      override = true
+      preload = true
+    }
+  }
+}
+
+# CloudFront access to S3 bucket
+resource "aws_s3_bucket_policy" "site" {
+  bucket = aws_s3_bucket.site.id
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Id" : "PolicyForCloudFrontAccessToResourcesBucket",
+    "Statement" : [
+      {
+        "Sid" : "AllowCloudFrontServicePrincipal",
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "cloudfront.amazonaws.com"
+        },
+        "Action" : "s3:GetObject",
+        "Resource" : "${aws_s3_bucket.site.arn}/*",
+        "Condition" : {
+          "StringEquals" : {
+            "AWS:SourceArn" : aws_cloudfront_distribution.site.arn
+          }
+        }
+      },
+      {
+        "Sid" : "AllowSSLRequestsOnly",
+        "Effect" : "Deny",
+        "Principal" : "*"
+        "Action" : "s3:GetObject",
+        "Resource" : "${aws_s3_bucket.site.arn}/*",
+        "Condition" : {
+          "Bool" : {
+            "aws:SecureTransport" : "false"
+          }
+        }
+      }
+    ]
+  })
+}
+
+################################################################################
+### DNS
+################################################################################
+
+########################################
+### A and AAAA records
+########################################
 
 resource "aws_route53_record" "site_a" {
   zone_id = aws_route53_zone.site.zone_id
@@ -111,41 +184,4 @@ resource "aws_route53_record" "site_aaaa_www" {
     zone_id                = aws_cloudfront_distribution.site.hosted_zone_id
     evaluate_target_health = false
   }
-}
-
-# CloudFront access to S3 bucket
-resource "aws_s3_bucket_policy" "site" {
-  bucket = aws_s3_bucket.site.id
-  policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Id" : "PolicyForCloudFrontAccessToResourcesBucket",
-    "Statement" : [
-      {
-        "Sid" : "AllowCloudFrontServicePrincipal",
-        "Effect" : "Allow",
-        "Principal" : {
-          "Service" : "cloudfront.amazonaws.com"
-        },
-        "Action" : "s3:GetObject",
-        "Resource" : "${aws_s3_bucket.site.arn}/*",
-        "Condition" : {
-          "StringEquals" : {
-            "AWS:SourceArn" : aws_cloudfront_distribution.site.arn
-          }
-        }
-      },
-      {
-        "Sid" : "AllowSSLRequestsOnly",
-        "Effect" : "Deny",
-        "Principal" : "*"
-        "Action" : "s3:GetObject",
-        "Resource" : "${aws_s3_bucket.site.arn}/*",
-        "Condition" : {
-          "Bool" : {
-            "aws:SecureTransport" : "false"
-          }
-        }
-      }
-    ]
-  })
 }
