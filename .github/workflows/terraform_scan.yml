@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run Terrascan
         uses: tenable/terrascan-action@main
@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v3 
+        uses: actions/checkout@v4 
 
       - name: Run KICS
         uses: Checkmarx/kics-github-action@v1.7.0
@@ -54,7 +54,7 @@ jobs:
 
     steps:
       - name: Check out the codebase
-        uses: actions/checkout@v3 
+        uses: actions/checkout@v4 
 
       - name: tfsec
         uses: aquasecurity/tfsec-action@v1.0.3
