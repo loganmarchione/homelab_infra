@@ -76,6 +76,7 @@ resource "aws_route53_record" "site_a" {
 }
 
 resource "aws_route53_record" "site_aaaa" {
+  count   = var.cloudfront_ipv6 ? 1 : 0
   zone_id = aws_route53_zone.site.zone_id
   name    = ""
   type    = "AAAA"
@@ -100,6 +101,7 @@ resource "aws_route53_record" "site_a_www" {
 }
 
 resource "aws_route53_record" "site_aaaa_www" {
+  count   = var.cloudfront_ipv6 ? 1 : 0
   zone_id = aws_route53_zone.site.zone_id
   name    = "www"
   type    = "AAAA"
