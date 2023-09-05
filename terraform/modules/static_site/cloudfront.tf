@@ -42,7 +42,7 @@ resource "aws_cloudfront_distribution" "site" {
     }
 
     response_headers_policy_id = aws_cloudfront_response_headers_policy.site.id
-    viewer_protocol_policy = "redirect-to-https"
+    viewer_protocol_policy     = "redirect-to-https"
   }
 
   logging_config {
@@ -64,7 +64,7 @@ resource "aws_cloudfront_distribution" "site" {
   }
 }
 
- resource "aws_cloudfront_response_headers_policy" "site" {
+resource "aws_cloudfront_response_headers_policy" "site" {
   name = "sane_defaults"
   security_headers_config {
     content_type_options {
@@ -73,24 +73,24 @@ resource "aws_cloudfront_distribution" "site" {
 
     frame_options {
       frame_option = "SAMEORIGIN"
-      override = true
+      override     = true
     }
 
     referrer_policy {
-      override = true
+      override        = true
       referrer_policy = "strict-origin-when-cross-origin"
     }
 
     strict_transport_security {
       access_control_max_age_sec = "31536000"
-      include_subdomains = true
-      override = true
-      preload = true
+      include_subdomains         = true
+      override                   = true
+      preload                    = true
     }
 
     xss_protection {
       mode_block = true
-      override = true
+      override   = true
       protection = true
     }
 
