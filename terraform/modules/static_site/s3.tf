@@ -133,7 +133,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "logging" {
     id     = "move_files_to_IA"
     status = "Enabled"
     transition {
-      days          = 30
+      days          = 10
       storage_class = "STANDARD_IA"
     }
   }
