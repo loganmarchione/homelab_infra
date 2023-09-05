@@ -20,7 +20,7 @@ resource "aws_s3_bucket_versioning" "site" {
   bucket = aws_s3_bucket.site.id
 
   versioning_configuration {
-    status = var.bucket_versioning
+    status = var.bucket_versioning_site
   }
 }
 
@@ -82,7 +82,7 @@ resource "aws_s3_bucket_versioning" "logging" {
   bucket = aws_s3_bucket.logging.id
 
   versioning_configuration {
-    status = var.bucket_versioning
+    status = var.bucket_versioning_logs
   }
 }
 

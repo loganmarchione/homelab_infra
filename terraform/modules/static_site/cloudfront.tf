@@ -23,7 +23,7 @@ resource "aws_cloudfront_distribution" "site" {
 
   aliases             = [aws_route53_zone.site.name, "www.${aws_route53_zone.site.name}"]
   comment             = local.s3_origin_id_site
-  default_root_object = var.test_page ? "index.html" : null
+  default_root_object = var.cloudfront_default_root_object != null ? var.cloudfront_default_root_object : null
   enabled             = var.cloudfront_enabled
   http_version        = var.cloudfront_http_version
   is_ipv6_enabled     = var.cloudfront_ipv6

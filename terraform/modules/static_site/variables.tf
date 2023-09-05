@@ -13,16 +13,35 @@ variable "bucket_name" {
   }
 }
 
-variable "bucket_versioning" {
+variable "bucket_versioning_logs" {
   default     = "Disabled"
   description = "State of bucket versioning"
   type        = string
 
   # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning#status
   validation {
-    condition     = contains(["Enabled", "Suspended", "Disabled"], var.bucket_versioning)
+    condition     = contains(["Enabled", "Suspended", "Disabled"], var.bucket_versioning_logs)
     error_message = "Variable must be 'Enabled', 'Suspended', or 'Disabled'."
   }
+}
+
+
+variable "bucket_versioning_site" {
+  default     = "Disabled"
+  description = "State of bucket versioning"
+  type        = string
+
+  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning#status
+  validation {
+    condition     = contains(["Enabled", "Suspended", "Disabled"], var.bucket_versioning_site)
+    error_message = "Variable must be 'Enabled', 'Suspended', or 'Disabled'."
+  }
+}
+
+variable "cloudfront_default_root_object" {
+  default     = null
+  description = "Specify the default root object or leave it as null"
+  type        = string
 }
 
 variable "cloudfront_enabled" {
