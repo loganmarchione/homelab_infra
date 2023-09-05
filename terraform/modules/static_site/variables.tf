@@ -77,6 +77,7 @@ variable "cloudfront_price_class" {
 
 variable "cloudfront_ssl_minimum_protocol_version" {
   default = "TLSv1.2_2021"
+  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution#minimum_protocol_version
   # https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
   description = "The minimum SSL protocol to use"
   type        = string

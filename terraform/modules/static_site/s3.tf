@@ -113,6 +113,7 @@ resource "aws_s3_bucket_ownership_controls" "logging" {
   bucket = aws_s3_bucket.logging.id
 
   rule {
+    # https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
     object_ownership = "BucketOwnerPreferred"
   }
 }
