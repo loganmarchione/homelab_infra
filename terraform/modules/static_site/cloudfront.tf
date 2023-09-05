@@ -65,7 +65,8 @@ resource "aws_cloudfront_distribution" "site" {
 }
 
 resource "aws_cloudfront_response_headers_policy" "site" {
-  name = "sane_defaults"
+  name    = var.site_name
+  comment = "Sane defaults"
   security_headers_config {
     content_type_options {
       override = true
