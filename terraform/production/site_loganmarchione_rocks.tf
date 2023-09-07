@@ -1,10 +1,9 @@
 module "static_site_loganmarchione_rocks" {
   source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.1"
 
-  # Needed because CloudFront can only use ACM certs generated in us-east-1
-  #  providers = {
-  #    aws.us-east-1 = aws.us-east-1
-  #  }
+  custom_default_tags = {
+    Environment = "Production"
+  }
 
   # The apex name of the site and the name of the S3 bucket to store the static files
   site_name   = "loganmarchione.rocks"
