@@ -1,5 +1,5 @@
 ---
-name: Terraform Scan
+name: Terraform Checks
 
 on:
   push:
@@ -15,9 +15,48 @@ defaults:
     working-directory: terraform/production
 
 jobs:
+  terraform_lint:
+    name: Terraform Lint
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform version
+        run: terraform version
+
+      - name: Terraform fmt
+        run: terraform fmt -check
+
+      - name: Terraform init
+        run: terraform init -backend=false -input=false
+
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v3
+        with:
+          github_token: ${{ secrets.TOKEN }}
+
+      - name: TFLint version
+        run: tflint --version
+
+      - name: TFLint init
+        run: tflint --init
+
+      - name: TFLint validate
+        run: tflint
+
   terrascan:
     name: Terrascan
 
+    needs: terraform_lint
     runs-on: ubuntu-latest
 
     steps:
@@ -35,6 +74,7 @@ jobs:
   kics:
     name: KICS
 
+    needs: terraform_lint
     runs-on: ubuntu-latest
 
     steps:
@@ -50,6 +90,7 @@ jobs:
   tfsec:
     name: tfsec
 
+    needs: terraform_lint
     runs-on: ubuntu-latest
 
     steps:
