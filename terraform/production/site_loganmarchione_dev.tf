@@ -1,5 +1,5 @@
 module "static_site_loganmarchione_dev" {
-  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.1"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.2"
 
   custom_default_tags = {
     Environment = "Production"
