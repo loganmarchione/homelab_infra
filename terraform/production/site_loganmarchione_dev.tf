@@ -1,5 +1,5 @@
 module "static_site_loganmarchione_dev" {
-  source = "../modules/static_site"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.1"
 
   # Needed because CloudFront can only use ACM certs generated in us-east-1
   #  providers = {
