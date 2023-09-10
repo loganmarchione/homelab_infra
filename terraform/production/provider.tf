@@ -10,6 +10,7 @@ provider "aws" {
   default_tags {
     tags = {
       ManagedBy = "Terraform"
+      Environment = "Production"
     }
   }
 }
@@ -23,6 +24,7 @@ provider "aws" {
   default_tags {
     tags = {
       ManagedBy = "Terraform"
+      Environment = "Production"
     }
   }
 }
