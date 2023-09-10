@@ -51,7 +51,7 @@ module "static_site_loganmarchione_dev" {
   cloudfront_viewer_protocol_policy       = "redirect-to-https"
 
   # Upload default files
-  upload_index     = true
-  upload_robots    = true
-  upload_404       = true
+  upload_index  = true
+  upload_robots = true
+  upload_404    = true
 }
