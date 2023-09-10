@@ -31,7 +31,7 @@ module "static_site_loganmarchione_rocks" {
   }
 
   # The domain name of the site (**MUST** match the Route53 hosted zone name (e.g., `domain.com`)
-  domain_name   = "loganmarchione.rocks"
+  domain_name = "loganmarchione.rocks"
 
   # Since this is a static site, we probably don't need versioning, since our source files are stored in git
   bucket_versioning_logs = false
