@@ -1,7 +1,7 @@
 resource "aws_budgets_budget" "monthly_cost_forecast" {
   name              = "total-budget-monthly"
   budget_type       = "COST"
-  limit_amount      = "5"
+  limit_amount      = "10"
   limit_unit        = "USD"
   time_unit         = "MONTHLY"
   time_period_start = formatdate("YYYY-MM-DD_hh:mm", timestamp())
