@@ -4,8 +4,7 @@ Everything in here is *heavily* customized for my homelab. It will not work for 
 
 # homelab_infra
 
-[![Terraform Lint](https://github.com/loganmarchione/homelab_infra/actions/workflows/terraform_lint.yml/badge.svg)](https://github.com/loganmarchione/homelab_infra/actions/workflows/terraform_lint.yml)
-[![Terraform Scan](https://github.com/loganmarchione/homelab_infra/actions/workflows/terraform_scan.yml/badge.svg)](https://github.com/loganmarchione/homelab_infra/actions/workflows/terraform_scan.yml)
+[![Terraform Checks](https://github.com/loganmarchione/homelab_infra/actions/workflows/terraform_checks.yml/badge.svg)](https://github.com/loganmarchione/homelab_infra/actions/workflows/terraform_checks.yml)
 
 Turning electricity into heat since 2015.
 
