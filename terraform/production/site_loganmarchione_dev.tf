@@ -24,7 +24,7 @@ resource "aws_route53_record" "loganmarchione_dev_nameservers" {
 ################################################################################
 
 module "static_site_loganmarchione_dev" {
-  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.7"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.9"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
@@ -65,4 +65,17 @@ module "static_site_loganmarchione_dev" {
 
 module "oidc_provider" {
   source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-provider"
+}
+
+################################################################################
+### Module for GitHub OIDC role
+################################################################################
+module "iam_github_oidc_role" {
+  source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-role"
+
+  subjects = ["loganmarchione/loganmarchione.com:*"]
+
+  policies = {
+    SiteUpdating = module.static_site_loganmarchione_dev.site_updating_iam_policy_arn
+  }
 }
