@@ -20,11 +20,11 @@ resource "aws_route53_record" "loganmarchione_dev_nameservers" {
 }
 
 ################################################################################
-### Module
+### Module for static site
 ################################################################################
 
 module "static_site_loganmarchione_dev" {
-  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.4"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.6"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
@@ -50,8 +50,19 @@ module "static_site_loganmarchione_dev" {
   cloudfront_ttl_max                      = 31536000
   cloudfront_viewer_protocol_policy       = "redirect-to-https"
 
+  # IAM
+  iam_policy_site_updating = true
+
   # Upload default files
   upload_index  = true
   upload_robots = true
   upload_404    = true
+}
+
+################################################################################
+### Module for OIDC provider
+################################################################################
+
+module "oidc_provider" {
+  source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-provider"
 }

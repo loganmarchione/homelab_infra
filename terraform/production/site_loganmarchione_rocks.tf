@@ -20,11 +20,11 @@ resource "aws_route53_record" "loganmarchione_rocks_nameservers" {
 }
 
 ################################################################################
-### Module
+### Module for static site
 ################################################################################
 
 module "static_site_loganmarchione_rocks" {
-  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.4"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.6"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
@@ -49,6 +49,9 @@ module "static_site_loganmarchione_rocks" {
   cloudfront_ttl_default                  = 86400
   cloudfront_ttl_max                      = 31536000
   cloudfront_viewer_protocol_policy       = "redirect-to-https"
+
+  # IAM
+  iam_policy_site_updating = false
 
   # Upload default files
   upload_index  = true
