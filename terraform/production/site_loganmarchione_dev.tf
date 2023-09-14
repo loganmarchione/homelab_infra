@@ -73,7 +73,7 @@ module "oidc_provider" {
 module "iam_github_oidc_role" {
   source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-role"
 
-  name     = "GitHubActionsOIDC"
+  name = "GitHubActionsOIDC"
   policies = {
     SiteUpdating = module.static_site_loganmarchione_dev.site_updating_iam_policy_arn
   }
