@@ -70,6 +70,7 @@ module "oidc_provider" {
 ################################################################################
 ### Module for GitHub OIDC role
 ################################################################################
+
 module "iam_github_oidc_role" {
   source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-role"
 
