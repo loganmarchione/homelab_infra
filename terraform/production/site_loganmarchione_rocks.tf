@@ -24,7 +24,7 @@ resource "aws_route53_record" "loganmarchione_rocks_nameservers" {
 ################################################################################
 
 module "static_site_loganmarchione_rocks" {
-  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.0.9"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.0"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
@@ -41,6 +41,9 @@ module "static_site_loganmarchione_rocks" {
   cloudfront_compress                     = true
   cloudfront_default_root_object          = "index.html"
   cloudfront_enabled                      = true
+  cloudfront_function_create              = false
+  cloudfront_function_filename            = "function.js"
+  cloudfront_function_name                = "ReWrites"
   cloudfront_http_version                 = "http2and3"
   cloudfront_ipv6                         = true
   cloudfront_price_class                  = "PriceClass_100"
