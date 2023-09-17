@@ -24,7 +24,7 @@ resource "aws_route53_record" "loganmarchione_dev_nameservers" {
 ################################################################################
 
 module "static_site_loganmarchione_dev" {
-  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.0"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.1"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
