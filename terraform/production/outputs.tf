@@ -10,18 +10,6 @@ output "acme_password" {
   sensitive   = true
 }
 
-output "dyndns_username" {
-  value       = aws_iam_access_key.dyndns.id
-  description = "DynDNS username"
-  sensitive   = true
-}
-
-output "dyndns_password" {
-  value       = aws_iam_access_key.dyndns.secret
-  description = "DynDNS password"
-  sensitive   = true
-}
-
 output "postfixrelay_username" {
   value       = aws_iam_access_key.postfixrelay.id
   description = "SES username"
