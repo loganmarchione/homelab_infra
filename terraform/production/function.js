@@ -2,16 +2,30 @@ function handler(event) {
     var request = event.request;
     var uri = request.uri;
 
-    // Rewrite URL
-    if (uri === "/resume") {
-        var response = {
-            statusCode: 301,
-            statusDescription: "Moved Permanently",
-            headers: {
-                "location": { "value": "https://loganmarchione.rocks/resumes/LoganMarchione_Resume_2023-03-31.pdf" }
-            }
+    // Responses
+    var response_resume = {
+        statusCode: 301,
+        statusDescription: "Moved Permanently",
+        headers: {
+            "location": { "value": "https://loganmarchione.rocks/resumes/LoganMarchione_Resume_2023-03-31.pdf" }
         }
-        return response;
+    }
+
+    var response_feed = {
+        statusCode: 301,
+        statusDescription: "Moved Permanently",
+        headers: {
+            "location": { "value": "/index.xml" }
+        }
+    }
+
+    // Returns
+    if (uri === "/resume") {
+        return response_resume;
+    }
+
+    if (uri === "/feed" || uri === "/feed/") {
+        return response_feed;
     }
 
     // https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/example-function-add-index.html
