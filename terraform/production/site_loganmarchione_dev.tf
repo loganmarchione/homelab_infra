@@ -50,7 +50,7 @@ module "static_site_loganmarchione_dev" {
   cloudfront_ssl_minimum_protocol_version = "TLSv1.2_2021"
   cloudfront_ttl_min                      = 3600
   cloudfront_ttl_default                  = 86400
-  cloudfront_ttl_max                      = 31536000
+  cloudfront_ttl_max                      = 2592000
   cloudfront_viewer_protocol_policy       = "redirect-to-https"
 
   # IAM
@@ -63,23 +63,15 @@ module "static_site_loganmarchione_dev" {
 }
 
 ################################################################################
-### Module for OIDC provider
-################################################################################
-
-module "oidc_provider" {
-  source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-provider"
-}
-
-################################################################################
 ### Module for GitHub OIDC role
 ################################################################################
 
 module "iam_github_oidc_role" {
   source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-role"
 
-  name = "GitHubActionsOIDC"
+  name = "GitHubActionsOIDC-loganmarchione.dev"
   policies = {
-    SiteUpdating = module.static_site_loganmarchione_dev.site_updating_iam_policy_arn
+    SiteUpdating-loganmarchione.dev = module.static_site_loganmarchione_dev.site_updating_iam_policy_arn
   }
   subjects = ["loganmarchione/loganmarchione.com:*"]
 }
