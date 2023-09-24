@@ -24,7 +24,7 @@ resource "aws_route53_record" "loganmarchione_dev_nameservers" {
 ################################################################################
 
 module "static_site_loganmarchione_dev" {
-  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.3"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.6"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
@@ -66,7 +66,7 @@ module "static_site_loganmarchione_dev" {
 ### Module for GitHub OIDC role
 ################################################################################
 
-module "iam_github_oidc_role" {
+module "iam_github_oidc_role_loganmarchione_dev" {
   source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-role"
 
   name = "GitHubActionsOIDC-loganmarchione-dev"
