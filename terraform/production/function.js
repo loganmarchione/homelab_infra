@@ -7,7 +7,7 @@ function handler(event) {
         statusCode: 301,
         statusDescription: "Moved Permanently",
         headers: {
-            "location": { "value": "https://loganmarchione.rocks/resumes/LoganMarchione_Resume_2023-03-31.pdf" }
+            "location": { "value": "https://loganmarchione.rocks/resumes/LoganMarchione_Resume_2023-09-25.pdf" }
         }
     }
 
