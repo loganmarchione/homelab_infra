@@ -3,5 +3,5 @@
 ################################################################################
 
 module "oidc_provider" {
-  source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.32.1//modules/iam-github-oidc-provider"
+  source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.33.0"
 }
