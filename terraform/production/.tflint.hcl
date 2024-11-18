@@ -5,5 +5,5 @@ plugin "aws" {
 }
 
 config {
-  call_module_type = all
+  call_module_type = "all"
 }
