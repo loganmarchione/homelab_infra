@@ -75,6 +75,16 @@ resource "aws_route53_record" "loganmarchione_com_cname_fastmail3" {
   ]
 }
 
+resource "aws_route53_record" "loganmarchione_com_bluesky" {
+  zone_id = aws_route53_zone.loganmarchione_com.zone_id
+  name    = "_atproto"
+  type    = "TXT"
+  ttl     = "3600"
+  records = [
+    "did=did:plc:p3k25pmexqzfvuczgjzxh5nk"
+  ]
+}
+
 ################################################################################
 ### Module for static site
 ################################################################################
