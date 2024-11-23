@@ -49,30 +49,6 @@ resource "aws_route53_record" "hamradionewbie_com_aaaa" {
   ]
 }
 
-resource "aws_route53_record" "hamradionewbie_com_a_www" {
-  zone_id = aws_route53_zone.hamradionewbie_com.zone_id
-  name    = "www"
-  type    = "A"
-
-  alias {
-    name                   = "hamradionewbie.com"
-    zone_id                = aws_route53_zone.hamradionewbie_com.zone_id
-    evaluate_target_health = false
-  }
-}
-
-resource "aws_route53_record" "hamradionewbie_com_aaaa_www" {
-  zone_id = aws_route53_zone.hamradionewbie_com.zone_id
-  name    = "www"
-  type    = "AAAA"
-
-  alias {
-    name                   = "hamradionewbie.com"
-    zone_id                = aws_route53_zone.hamradionewbie_com.zone_id
-    evaluate_target_health = false
-  }
-}
-
 resource "aws_route53_record" "hamradionewbie_com_caa" {
   zone_id = aws_route53_zone.hamradionewbie_com.zone_id
   name    = ""
