@@ -5,22 +5,7 @@ provider "registry.terraform.io/digitalocean/digitalocean" {
   version     = "2.44.1"
   constraints = "~> 2.44.0"
   hashes = [
-    "h1:3jVJVJE+SMMyIEnFrQDMsk2xgm4r5v4VxaBQYvD1sd0=",
-    "h1:8BTPRyH1jGEtIZtBEaMsZXWtNXAZ7331iwho3Hx+CPo=",
-    "h1:GvT4REI7rSEzRbAoXZM2Gy/htphQ+eaKq/BPy/MfkqY=",
-    "h1:Ozd4mwLLqUzezofdSt8P1qT07iatHqW6D1obvV3F3WA=",
-    "h1:PVVdMJ49aeVovfa66Sdru+RTkHfBZB93mIUmAeaopl8=",
-    "h1:SUhDDGE06fdANC1GefOl1Bt7LabpW7BO/zqMW7V7yzk=",
-    "h1:VRst9ro+GHdBmEebFrxGYFDLKIy1Q3jFAvlUXClQ47g=",
-    "h1:azMhGofwH3FATePOej3v9lDNUBUytbJ5gmgkZkpzLJc=",
-    "h1:cKy/rDQmjM58XAFbFdUVltyprXeI5O0UQqwg4rtw6qE=",
-    "h1:ckZ+54kVhm15w1/Z4TMz/tvB/J8FKv2gnRXwK7wkkDk=",
-    "h1:mj+nqfEZk0GXzIAB8Wk8gZBgr9JyXy2Oquqzz5L8K14=",
-    "h1:sNh4uv8o2Y8shwmtzC2j9quM68vQFM7JMqhtoyQ3esg=",
-    "h1:vN1MUmS5BZ14SeDpLbCZjmOgSUmV4LuQ/BDYspXj+BE=",
-    "h1:vpaZRBlCZ5akOU72mqMTf3ZBDr4/Lw8D1wRGKnP3Zpo=",
     "h1:wIccPAQ8HhEOg/Eo7ZLLiADITIfDRBv3ncRtnuwwkKc=",
-    "h1:wZnqvKBRR6ohozYRki09BxsR3ZZHvmXCPbGFlIVsc6k=",
     "zh:02e0bd7320167fed3b9ceea492ab218c2568abd619e816c14542c0d185eb969a",
     "zh:309452ac92ddfe6402613a5a7dcaf780e1b648e8737da3fef068e587eb932d88",
     "zh:32433f540e9feb9a22a015e83dc299d46f08adec3880f72bd6af89ac1032b13c",
@@ -44,20 +29,7 @@ provider "registry.terraform.io/hashicorp/aws" {
   version     = "5.77.0"
   constraints = ">= 4.0.0, >= 5.15.0, ~> 5.77.0"
   hashes = [
-    "h1:1Bc6wmBW77rMZLIJ9sgqmmlwt+J7Slz1CTToLgpn5VE=",
-    "h1:34ygrZFyB39KOd7jHpoEt1JvdHZxg93aKgT0m7zL+Kw=",
-    "h1:7yv9NDANq8B0hKcxySR053tYoG8rKHC2EobEEXjUdDg=",
     "h1:9lQ7FpLAN1+Bt1eb/daWlyl2N9aWsBTw2tgLR/hxODE=",
-    "h1:9tmqgF8scEl1MmBrNysovnEvxiZzpUfCBCnJldwzhVI=",
-    "h1:FvD/IrL0iBhgdSzBZfVK30uZDEIbNdCfmDDJdyKfJ2E=",
-    "h1:KUQxsXAQm4s4jAAJceu4ZUMy/DVmmLqAljO2D/JyKPk=",
-    "h1:MQfEyNQ4Fzeqe0/Ay9lVqkeZSOpkokgxn/S4LTKKNC4=",
-    "h1:NHBqOkWesBo4iIi19E9p4/BOW7GnDCos4KbApas5bZc=",
-    "h1:UrcybYxy8D2lphT2FMTNYRQIKDZNWROgmvDnhI3xvkk=",
-    "h1:Xq5YNuJtQpaJPkzK+M1Hvhx5h8zzSJMnsy5KRtxTgTI=",
-    "h1:j60RglkZWyThGApFmIysI5ap5+kZMBYbxm8IizKXAGU=",
-    "h1:koBS6VTK/a+wgxjhKW0EOTwUXquG77bGQpqSP82a9ts=",
-    "h1:xs9dxelN9MFSeqI/nwASuTKwZbrqvSzIqM4gXvgvr8U=",
     "zh:0bb61ed8a86a231e466ceffd010cb446418483853aa7e35ecb628cf578fa3905",
     "zh:15d37511e55db46a50e703195858b816b7bbfd7bd6d193abf45aec1cb31cfc29",
     "zh:1cdaec2ca4408e90aee6ea550ff4ff01a46033854c26d71309541975aa6317bd",
