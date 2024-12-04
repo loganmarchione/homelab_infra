@@ -67,7 +67,7 @@ module "static_site_loganmarchione_dev" {
 ################################################################################
 
 module "iam_github_oidc_role_loganmarchione_dev" {
-  source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.48.0//modules/iam-github-oidc-role"
+  source = "github.com/terraform-aws-modules/terraform-aws-iam//modules/iam-github-oidc-role?ref=v5.48.0"
 
   name = "GitHubActionsOIDC-loganmarchione-dev"
   policies = {
