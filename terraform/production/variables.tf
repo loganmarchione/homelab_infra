@@ -30,13 +30,6 @@ variable "do_token" {
   type        = string
 }
 
-# doctl compute image list --public
-variable "do_image" {
-  default     = "debian-11-x64"
-  description = "Default OS image"
-  type        = string
-}
-
 # doctl compute region list
 variable "do_region" {
   default     = "nyc3"
