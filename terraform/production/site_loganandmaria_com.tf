@@ -28,7 +28,7 @@ resource "aws_route53_record" "loganandmaria_com_a" {
   name    = ""
   type    = "A"
   ttl     = "3600"
-  records = [digitalocean_droplet.web02.ipv4_address]
+  records = [digitalocean_droplet.web01.ipv4_address]
 }
 
 resource "aws_route53_record" "loganandmaria_com_aaaa" {
@@ -36,7 +36,7 @@ resource "aws_route53_record" "loganandmaria_com_aaaa" {
   name    = ""
   type    = "AAAA"
   ttl     = "3600"
-  records = [digitalocean_droplet.web02.ipv6_address]
+  records = [digitalocean_droplet.web01.ipv6_address]
 }
 
 resource "aws_route53_record" "loganandmaria_com_a_www" {
