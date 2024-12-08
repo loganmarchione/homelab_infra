@@ -7,7 +7,7 @@
 ########################################
 
 resource "digitalocean_domain" "mariapietropola_com" {
-  name       = "mariapietropola.com"
+  name = "mariapietropola.com"
 }
 
 ########################################
@@ -54,7 +54,7 @@ resource "digitalocean_record" "mariapietropola_com_caa_issue" {
   flags  = "0"
   tag    = "issue"
   # https://github.com/digitalocean/terraform-provider-digitalocean/issues/1010#issuecomment-1638363717
-  value  = "letsencrypt.org."
+  value = "letsencrypt.org."
 }
 
 resource "digitalocean_record" "mariapietropola_com_caa_issuewild" {
@@ -65,5 +65,5 @@ resource "digitalocean_record" "mariapietropola_com_caa_issuewild" {
   flags  = "0"
   tag    = "issuewild"
   # https://github.com/digitalocean/terraform-provider-digitalocean/issues/1010#issuecomment-1638363717
-  value  = "letsencrypt.org."
+  value = "letsencrypt.org."
 }
