@@ -6,70 +6,64 @@
 ### Zone and NS records
 ########################################
 
-resource "aws_route53_zone" "mariapietropola_com" {
-  name = "mariapietropola.com"
-}
-
-resource "aws_route53_record" "mariapietropola_com_nameservers" {
-  zone_id         = aws_route53_zone.mariapietropola_com.zone_id
-  name            = aws_route53_zone.mariapietropola_com.name
-  type            = "NS"
-  ttl             = "3600"
-  allow_overwrite = true
-  records         = aws_route53_zone.mariapietropola_com.name_servers
+resource "digitalocean_domain" "mariapietropola_com" {
+  name       = "mariapietropola.com"
 }
 
 ########################################
 ### All other records
 ########################################
 
-resource "aws_route53_record" "mariapietropola_com_a" {
-  zone_id = aws_route53_zone.mariapietropola_com.zone_id
-  name    = ""
-  type    = "A"
-  ttl     = "3600"
-  records = [digitalocean_droplet.web02.ipv4_address]
+resource "digitalocean_record" "mariapietropola_com_a" {
+  domain = digitalocean_domain.mariapietropola_com.id
+  name   = "@"
+  type   = "A"
+  ttl    = "1800"
+  value  = digitalocean_droplet.web01.ipv4_address
 }
 
-resource "aws_route53_record" "mariapietropola_com_aaaa" {
-  zone_id = aws_route53_zone.mariapietropola_com.zone_id
-  name    = ""
-  type    = "AAAA"
-  ttl     = "3600"
-  records = [digitalocean_droplet.web02.ipv6_address]
+resource "digitalocean_record" "mariapietropola_com_aaaa" {
+  domain = digitalocean_domain.mariapietropola_com.id
+  name   = "@"
+  type   = "AAAA"
+  ttl    = "1800"
+  value  = digitalocean_droplet.web01.ipv6_address
 }
 
-resource "aws_route53_record" "mariapietropola_com_a_www" {
-  zone_id = aws_route53_zone.mariapietropola_com.zone_id
-  name    = "www"
-  type    = "A"
-
-  alias {
-    name                   = "mariapietropola.com"
-    zone_id                = aws_route53_zone.mariapietropola_com.zone_id
-    evaluate_target_health = false
-  }
+resource "digitalocean_record" "mariapietropola_com_a_www" {
+  domain = digitalocean_domain.mariapietropola_com.id
+  name   = "www"
+  type   = "A"
+  ttl    = "1800"
+  value  = digitalocean_droplet.web01.ipv4_address
 }
 
-resource "aws_route53_record" "mariapietropola_com_aaaa_www" {
-  zone_id = aws_route53_zone.mariapietropola_com.zone_id
-  name    = "www"
-  type    = "AAAA"
-
-  alias {
-    name                   = "mariapietropola.com"
-    zone_id                = aws_route53_zone.mariapietropola_com.zone_id
-    evaluate_target_health = false
-  }
+resource "digitalocean_record" "mariapietropola_com_aaaa_www" {
+  domain = digitalocean_domain.mariapietropola_com.id
+  name   = "www"
+  type   = "AAAA"
+  ttl    = "1800"
+  value  = digitalocean_droplet.web01.ipv6_address
 }
 
-resource "aws_route53_record" "mariapietropola_com_caa" {
-  zone_id = aws_route53_zone.mariapietropola_com.zone_id
-  name    = ""
-  type    = "CAA"
-  ttl     = "3600"
-  records = [
-    "0 issue \"letsencrypt.org\"",
-    "0 issuewild \"letsencrypt.org\""
-  ]
+resource "digitalocean_record" "mariapietropola_com_caa_issue" {
+  domain = digitalocean_domain.mariapietropola_com.id
+  name   = "@"
+  type   = "CAA"
+  ttl    = "1800"
+  flags  = "0"
+  tag    = "issue"
+  # https://github.com/digitalocean/terraform-provider-digitalocean/issues/1010#issuecomment-1638363717
+  value  = "letsencrypt.org."
+}
+
+resource "digitalocean_record" "mariapietropola_com_caa_issuewild" {
+  domain = digitalocean_domain.mariapietropola_com.id
+  name   = "@"
+  type   = "CAA"
+  ttl    = "1800"
+  flags  = "0"
+  tag    = "issuewild"
+  # https://github.com/digitalocean/terraform-provider-digitalocean/issues/1010#issuecomment-1638363717
+  value  = "letsencrypt.org."
 }
