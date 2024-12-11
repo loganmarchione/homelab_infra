@@ -41,7 +41,7 @@ resource "cloudflare_record" "hamradionewbie_com_aaaa" {
   proxied = false
 }
 
-resource "cloudflare_record" "hamradionewbie_com_caa_issue" {
+resource "cloudflare_record" "hamradionewbie_com_caa" {
   for_each = toset(local.caa_record_tags)
 
   zone_id = cloudflare_zone.hamradionewbie_com.id
