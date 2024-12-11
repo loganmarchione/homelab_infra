@@ -42,7 +42,7 @@ resource "cloudflare_record" "hamradionewbie_com_aaaa" {
 }
 
 resource "cloudflare_record" "hamradionewbie_com_caa" {
-  for_each = toset(local.caa_record_tags)
+  for_each = toset(local.lets_encrypt_caa_record_tags)
 
   zone_id = cloudflare_zone.hamradionewbie_com.id
   name    = "@"

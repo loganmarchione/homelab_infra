@@ -56,7 +56,7 @@ resource "cloudflare_record" "loganandmaria_com_aaaa_www" {
 }
 
 resource "cloudflare_record" "loganandmaria_com_caa" {
-  for_each = toset(local.caa_record_tags)
+  for_each = toset(local.lets_encrypt_caa_record_tags)
 
   zone_id = cloudflare_zone.loganandmaria_com.id
   name    = "@"
