@@ -20,7 +20,7 @@ resource "cloudflare_zone" "hamradionewbie_com" {
 ########################################
 
 resource "cloudflare_record" "hamradionewbie_com_a" {
-  for_each = toset(local.github_pages_ipv4_addresses)
+  for_each = toset(local.hamradionewbie_com_github_pages_ipv4_addresses)
 
   zone_id = cloudflare_zone.hamradionewbie_com.id
   name    = "@"
@@ -31,7 +31,7 @@ resource "cloudflare_record" "hamradionewbie_com_a" {
 }
 
 resource "cloudflare_record" "hamradionewbie_com_aaaa" {
-  for_each = toset(local.github_pages_ipv6_addresses)
+  for_each = toset(local.hamradionewbie_com_github_pages_ipv6_addresses)
 
   zone_id = cloudflare_zone.hamradionewbie_com.id
   name    = "@"
