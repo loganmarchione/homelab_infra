@@ -45,3 +45,18 @@ variable "do_size" {
   type        = string
 }
 
+################################################################################
+### Cloudflare
+################################################################################
+
+variable "cloudflare_api_token" {
+  description = "Cloudflare API token (in secrets.tfvars)"
+  sensitive   = true
+  type        = string
+}
+
+variable "cloudflare_account_id" {
+  description = "Cloudflare account ID (in secrets.tfvars)"
+  sensitive   = true
+  type        = string
+}
