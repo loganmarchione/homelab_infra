@@ -86,6 +86,6 @@ resource "cloudflare_record" "loganandmaria_com_txt" {
   name    = "@"
   type    = "TXT"
   ttl     = 3600
-  content = "v=spf1 include:_spf.google.com ~all"
+  content = "\"v=spf1 include:_spf.google.com ~all\""
   proxied = false
 }
