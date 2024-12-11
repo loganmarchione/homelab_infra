@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.80.0"
     }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 4.47.0"
+    }
     digitalocean = {
       source  = "digitalocean/digitalocean"
       version = "~> 2.45.0"

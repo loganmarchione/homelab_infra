@@ -36,3 +36,11 @@ provider "aws" {
 provider "digitalocean" {
   token = var.do_token
 }
+
+################################################################################
+### Cloudflare
+################################################################################
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
+}
