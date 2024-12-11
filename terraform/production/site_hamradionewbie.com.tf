@@ -6,56 +6,51 @@
 ### Zone and NS records
 ########################################
 
-resource "aws_route53_zone" "hamradionewbie_com" {
-  name = "hamradionewbie.com"
-}
+resource "cloudflare_zone" "hamradionewbie_com" {
+  zone = "hamradionewbie.com"
 
-resource "aws_route53_record" "hamradionewbie_com_nameservers" {
-  zone_id         = aws_route53_zone.hamradionewbie_com.zone_id
-  name            = aws_route53_zone.hamradionewbie_com.name
-  type            = "NS"
-  ttl             = "3600"
-  allow_overwrite = true
-  records         = aws_route53_zone.hamradionewbie_com.name_servers
+  account_id = var.cloudflare_account_id
+  paused     = false
+  plan       = "free"
+  type       = "full"
 }
 
 ########################################
 ### All other records
 ########################################
 
-resource "aws_route53_record" "hamradionewbie_com_a" {
-  zone_id = aws_route53_zone.hamradionewbie_com.zone_id
-  name    = ""
+resource "cloudflare_record" "hamradionewbie_com_a" {
+  for_each = toset(local.github_pages_ipv4_addresses)
+
+  zone_id = cloudflare_zone.hamradionewbie_com.id
+  name    = "@"
   type    = "A"
-  ttl     = "3600"
-  records = [
-    "185.199.108.153",
-    "185.199.109.153",
-    "185.199.110.153",
-    "185.199.111.153"
-  ]
+  ttl     = 3600
+  content = each.value
+  proxied = false
 }
 
-resource "aws_route53_record" "hamradionewbie_com_aaaa" {
-  zone_id = aws_route53_zone.hamradionewbie_com.zone_id
-  name    = ""
+resource "cloudflare_record" "hamradionewbie_com_aaaa" {
+  for_each = toset(local.github_pages_ipv6_addresses)
+
+  zone_id = cloudflare_zone.hamradionewbie_com.id
+  name    = "@"
   type    = "AAAA"
-  ttl     = "3600"
-  records = [
-    "2606:50c0:8000::153",
-    "2606:50c0:8001::153",
-    "2606:50c0:8002::153",
-    "2606:50c0:8003::153"
-  ]
+  ttl     = 3600
+  content = each.value
+  proxied = false
 }
 
-resource "aws_route53_record" "hamradionewbie_com_caa" {
-  zone_id = aws_route53_zone.hamradionewbie_com.zone_id
-  name    = ""
+resource "cloudflare_record" "hamradionewbie_com_caa_issue" {
+  for_each = toset(local.caa_record_tags)
+
+  zone_id = cloudflare_zone.hamradionewbie_com.id
+  name    = "@"
   type    = "CAA"
-  ttl     = "3600"
-  records = [
-    "0 issue \"letsencrypt.org\"",
-    "0 issuewild \"letsencrypt.org\""
-  ]
+  ttl     = 3600
+  data {
+    flags = "0"
+    tag   = each.value
+    value = "letsencrypt.org"
+  }
 }
