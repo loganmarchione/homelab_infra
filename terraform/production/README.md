@@ -34,6 +34,10 @@ After setup is complete, do the following:
 
 * An API key is already generated
 
+## Cloudflare
+
+* An API token is already generated
+
 ## Usage
 
 ```
