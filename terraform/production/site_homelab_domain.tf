@@ -6,30 +6,29 @@
 ### Zone and NS records
 ########################################
 
-resource "aws_route53_zone" "homelab_domain" {
-  name = var.homelab_domain
-}
+resource "cloudflare_zone" "homelab_domain" {
+  zone = var.homelab_domain
 
-resource "aws_route53_record" "homelab_domain_nameservers" {
-  zone_id         = aws_route53_zone.homelab_domain.zone_id
-  name            = aws_route53_zone.homelab_domain.name
-  type            = "NS"
-  ttl             = "3600"
-  allow_overwrite = true
-  records         = aws_route53_zone.homelab_domain.name_servers
+  account_id = var.cloudflare_account_id
+  paused     = false
+  plan       = "free"
+  type       = "full"
 }
 
 ########################################
 ### All other records
 ########################################
 
-resource "aws_route53_record" "homelab_domain_caa" {
-  zone_id = aws_route53_zone.homelab_domain.zone_id
-  name    = ""
+resource "cloudflare_record" "homelab_domain_caa" {
+  for_each = toset(local.lets_encrypt_caa_record_tags)
+
+  zone_id = cloudflare_zone.homelab_domain.id
+  name    = "@"
   type    = "CAA"
-  ttl     = "3600"
-  records = [
-    "0 issue \"letsencrypt.org\"",
-    "0 issuewild \"letsencrypt.org\""
-  ]
+  ttl     = 3600
+  data {
+    flags = "0"
+    tag   = each.value
+    value = "letsencrypt.org"
+  }
 }

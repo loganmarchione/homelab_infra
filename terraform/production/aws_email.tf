@@ -30,14 +30,14 @@ resource "aws_ses_domain_dkim" "loganmarchione_com" {
 
 # Create the domain
 resource "aws_ses_domain_identity" "homelab_domain" {
-  domain = aws_route53_zone.homelab_domain.name
+  domain = var.homelab_domain
 }
 
 # Verify the domain
 resource "aws_ses_domain_identity_verification" "homelab_domain" {
   domain = aws_ses_domain_identity.homelab_domain.id
   depends_on = [
-    aws_route53_record.homelab_domain_txt_ses
+    cloudflare_record.homelab_domain_txt_aws_ses
   ]
 }
 
@@ -82,25 +82,23 @@ resource "aws_route53_record" "loganmarchione_com_cname_ses" {
 ########################################
 
 # Create DNS records for SES
-resource "aws_route53_record" "homelab_domain_txt_ses" {
-  zone_id = aws_route53_zone.homelab_domain.id
-  name    = "_amazonses.${aws_ses_domain_identity.homelab_domain.domain}"
+resource "cloudflare_record" "homelab_domain_txt_aws_ses" {
+  zone_id = cloudflare_zone.homelab_domain.id
+  name    = "_amazonses"
   type    = "TXT"
-  ttl     = "3600"
-  records = [
-    aws_ses_domain_identity.homelab_domain.verification_token
-  ]
+  ttl     = 3600
+  content = aws_ses_domain_identity.homelab_domain.verification_token
+  proxied = false
 }
 
 # Create DNS records for DKIM
-resource "aws_route53_record" "homelab_domain_cname_ses" {
-  zone_id = aws_route53_zone.homelab_domain.id
+resource "cloudflare_record" "homelab_domain_cname_aws_ses" {
+  zone_id = cloudflare_zone.homelab_domain.id
   name    = "${element(aws_ses_domain_dkim.homelab_domain.dkim_tokens, count.index)}._domainkey"
   type    = "CNAME"
-  ttl     = "3600"
-  records = [
-    "${element(aws_ses_domain_dkim.homelab_domain.dkim_tokens, count.index)}.dkim.amazonses.com"
-  ]
+  ttl     = 3600
+  content = "${element(aws_ses_domain_dkim.homelab_domain.dkim_tokens, count.index)}.dkim.amazonses.com"
+  proxied = false
+
   count = 3
 }
-
