@@ -58,8 +58,16 @@ resource "aws_s3_bucket_lifecycle_configuration" "loganmarchione_logging" {
   bucket = aws_s3_bucket.loganmarchione_logging.id
 
   rule {
-    id     = "30d_move_to_S3_IA"
+    id = "30d_move_to_S3_IA_and_1y_delete_old_objects"
+    filter {
+      prefix = "s3_${aws_s3_bucket.terraform_state.id}/"
+    }
+    # expire (delete) objects older than 1 year
+    expiration {
+      days = 365
+    }
     status = "Enabled"
+    # transition to STANDARD_ID after 30 days
     transition {
       days          = 30
       storage_class = "STANDARD_IA"

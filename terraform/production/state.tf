@@ -54,6 +54,26 @@ resource "aws_s3_bucket_public_access_block" "s3_terraform_state" {
   restrict_public_buckets = true
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "terraform_state" {
+  bucket = aws_s3_bucket.terraform_state.id
+
+  rule {
+    id = "30d_move_to_S3_IA_and_1y_delete_old_objects"
+    # expire (delete) objects older than 1 year
+    noncurrent_version_expiration {
+      newer_noncurrent_versions = 10
+      noncurrent_days           = 365
+    }
+    status = "Enabled"
+    # transition to STANDARD_ID after 30 days
+    noncurrent_version_transition {
+      newer_noncurrent_versions = 10
+      noncurrent_days           = 30
+      storage_class             = "STANDARD_IA"
+    }
+  }
+}
+
 # Store Terraform state in a S3 bucket
 terraform {
   backend "s3" {
