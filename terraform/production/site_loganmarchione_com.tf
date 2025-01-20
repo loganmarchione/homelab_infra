@@ -45,33 +45,14 @@ resource "aws_route53_record" "loganmarchione_com_txt" {
   ]
 }
 
-resource "aws_route53_record" "loganmarchione_com_cname_fastmail1" {
+resource "aws_route53_record" "loganmarchione_com_cname_dkim" {
+  for_each = { for i in range(1, 4) : "${i}" => i }
   zone_id = aws_route53_zone.loganmarchione_com.zone_id
-  name    = "fm1._domainkey"
+  name    = "fm${each.value}._domainkey"
   type    = "CNAME"
   ttl     = "3600"
   records = [
-    "fm1.loganmarchione.com.dkim.fmhosted.com"
-  ]
-}
-
-resource "aws_route53_record" "loganmarchione_com_cname_fastmail2" {
-  zone_id = aws_route53_zone.loganmarchione_com.zone_id
-  name    = "fm2._domainkey"
-  type    = "CNAME"
-  ttl     = "3600"
-  records = [
-    "fm2.loganmarchione.com.dkim.fmhosted.com"
-  ]
-}
-
-resource "aws_route53_record" "loganmarchione_com_cname_fastmail3" {
-  zone_id = aws_route53_zone.loganmarchione_com.zone_id
-  name    = "fm3._domainkey"
-  type    = "CNAME"
-  ttl     = "3600"
-  records = [
-    "fm3.loganmarchione.com.dkim.fmhosted.com"
+    "fm${each.value}.loganmarchione.com.dkim.fmhosted.com"
   ]
 }
 
