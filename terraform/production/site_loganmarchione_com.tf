@@ -46,13 +46,13 @@ resource "aws_route53_record" "loganmarchione_com_txt" {
 }
 
 resource "aws_route53_record" "loganmarchione_com_cname_dkim" {
-  for_each = { for i in range(1, 4) : "${i}" => i }
+  count   = 3
   zone_id = aws_route53_zone.loganmarchione_com.zone_id
-  name    = "fm${each.value}._domainkey"
+  name    = "fm${count.index + 1}._domainkey"
   type    = "CNAME"
   ttl     = "3600"
   records = [
-    "fm${each.value}.loganmarchione.com.dkim.fmhosted.com"
+    "fm${count.index + 1}.loganmarchione.com.dkim.fmhosted.com"
   ]
 }
 
@@ -63,6 +63,63 @@ resource "aws_route53_record" "loganmarchione_com_bluesky" {
   ttl     = "3600"
   records = [
     "did=did:plc:p3k25pmexqzfvuczgjzxh5nk"
+  ]
+}
+
+########################################
+### Email autodiscovery
+########################################
+# https://www.fastmail.help/hc/en-us/articles/360060591153-Manual-DNS-configuration
+
+resource "aws_route53_record" "loganmarchione_com_autodiscovery_submissions" {
+  zone_id = aws_route53_zone.loganmarchione_com.zone_id
+  name    = "_submissions._tcp.${aws_route53_zone.loganmarchione_com.name}"
+  type    = "SRV"
+  ttl     = "3600"
+  records = [
+    "0 1 465 smtp.fastmail.com"
+  ]
+}
+
+resource "aws_route53_record" "loganmarchione_com_autodiscovery_imaps" {
+  zone_id = aws_route53_zone.loganmarchione_com.zone_id
+  name    = "_imaps._tcp.${aws_route53_zone.loganmarchione_com.name}"
+  type    = "SRV"
+  ttl     = "3600"
+  records = [
+    "0 1 993 imap.fastmail.com"
+  ]
+}
+
+
+resource "aws_route53_record" "loganmarchione_com_autodiscovery_autodiscover" {
+  zone_id = aws_route53_zone.loganmarchione_com.zone_id
+  name    = "_autodiscover._tcp.${aws_route53_zone.loganmarchione_com.name}"
+  type    = "SRV"
+  ttl     = "3600"
+  records = [
+    "0 1 443 autodiscover.fastmail.com"
+  ]
+}
+
+
+resource "aws_route53_record" "loganmarchione_com_autodiscovery_carddavs" {
+  zone_id = aws_route53_zone.loganmarchione_com.zone_id
+  name    = "_carddavs._tcp.${aws_route53_zone.loganmarchione_com.name}"
+  type    = "SRV"
+  ttl     = "3600"
+  records = [
+    "0 1 443 carddav.fastmail.com"
+  ]
+}
+
+resource "aws_route53_record" "loganmarchione_com_autodiscovery_caldavs" {
+  zone_id = aws_route53_zone.loganmarchione_com.zone_id
+  name    = "_caldavs._tcp.${aws_route53_zone.loganmarchione_com.name}"
+  type    = "SRV"
+  ttl     = "3600"
+  records = [
+    "0 1 443 caldav.fastmail.com"
   ]
 }
 
