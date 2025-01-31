@@ -6,27 +6,27 @@
 ### Zone and NS records
 ########################################
 
-resource "aws_route53_zone" "loganmarchione_dev" {
-  name = "loganmarchione.dev"
+resource "aws_route53_zone" "loganmarchione_net" {
+  name = "loganmarchione.net"
 }
 
-resource "aws_route53_record" "loganmarchione_dev_nameservers" {
-  zone_id         = aws_route53_zone.loganmarchione_dev.zone_id
-  name            = aws_route53_zone.loganmarchione_dev.name
+resource "aws_route53_record" "loganmarchione_net_nameservers" {
+  zone_id         = aws_route53_zone.loganmarchione_net.zone_id
+  name            = aws_route53_zone.loganmarchione_net.name
   type            = "NS"
   ttl             = "3600"
   allow_overwrite = true
-  records         = aws_route53_zone.loganmarchione_dev.name_servers
+  records         = aws_route53_zone.loganmarchione_net.name_servers
 }
 
 ################################################################################
 ### Module for static site
 ################################################################################
 
-module "static_site_loganmarchione_dev" {
+module "static_site_loganmarchione_net" {
   depends_on = [
-    aws_route53_zone.loganmarchione_dev,
-    aws_route53_record.loganmarchione_dev_nameservers
+    aws_route53_zone.loganmarchione_net,
+    aws_route53_record.loganmarchione_net_nameservers
   ]
 
   source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.6"
@@ -36,7 +36,7 @@ module "static_site_loganmarchione_dev" {
   }
 
   # The domain name of the site (**MUST** match the Route53 hosted zone name (e.g., `domain.com`)
-  domain_name = "loganmarchione.dev"
+  domain_name = "loganmarchione.net"
 
   # Since this is a static site, we probably don't need versioning, since our source files are stored in git
   bucket_versioning_logs = false
@@ -46,7 +46,7 @@ module "static_site_loganmarchione_dev" {
   cloudfront_compress                     = true
   cloudfront_default_root_object          = "index.html"
   cloudfront_enabled                      = true
-  cloudfront_function_create              = true
+  cloudfront_function_create              = false
   cloudfront_function_filename            = "function.js"
   cloudfront_function_name                = "ReWrites"
   cloudfront_http_version                 = "http2and3"
@@ -59,24 +59,10 @@ module "static_site_loganmarchione_dev" {
   cloudfront_viewer_protocol_policy       = "redirect-to-https"
 
   # IAM
-  iam_policy_site_updating = true
+  iam_policy_site_updating = false
 
   # Upload default files
-  upload_index  = false
-  upload_robots = false
-  upload_404    = false
-}
-
-################################################################################
-### Module for GitHub OIDC role
-################################################################################
-
-module "iam_github_oidc_role_loganmarchione_dev" {
-  source = "github.com/terraform-aws-modules/terraform-aws-iam//modules/iam-github-oidc-role?ref=v5.52.2"
-
-  name = "GitHubActionsOIDC-loganmarchione-dev"
-  policies = {
-    SiteUpdating-loganmarchione-dev = module.static_site_loganmarchione_dev.site_updating_iam_policy_arn
-  }
-  subjects = ["loganmarchione/loganmarchione.com:*"]
+  upload_index  = true
+  upload_robots = true
+  upload_404    = true
 }

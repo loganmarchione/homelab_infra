@@ -128,6 +128,11 @@ resource "aws_route53_record" "loganmarchione_com_autodiscovery_caldavs" {
 ################################################################################
 
 module "static_site_loganmarchione_com" {
+  depends_on = [
+    aws_route53_zone.loganmarchione_com,
+    aws_route53_record.loganmarchione_com_nameservers
+  ]
+
   source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.6"
 
   providers = {
