@@ -37,7 +37,7 @@ resource "aws_ses_domain_identity" "homelab_domain" {
 resource "aws_ses_domain_identity_verification" "homelab_domain" {
   domain = aws_ses_domain_identity.homelab_domain.id
   depends_on = [
-    cloudflare_record.homelab_domain_txt_aws_ses
+    cloudflare_dns_record.homelab_domain_txt_aws_ses
   ]
 }
 
@@ -82,7 +82,7 @@ resource "aws_route53_record" "loganmarchione_com_cname_ses" {
 ########################################
 
 # Create DNS records for SES
-resource "cloudflare_record" "homelab_domain_txt_aws_ses" {
+resource "cloudflare_dns_record" "homelab_domain_txt_aws_ses" {
   zone_id = cloudflare_zone.homelab_domain.id
   name    = "_amazonses"
   type    = "TXT"
@@ -92,7 +92,7 @@ resource "cloudflare_record" "homelab_domain_txt_aws_ses" {
 }
 
 # Create DNS records for DKIM
-resource "cloudflare_record" "homelab_domain_cname_aws_ses" {
+resource "cloudflare_dns_record" "homelab_domain_cname_aws_ses" {
   zone_id = cloudflare_zone.homelab_domain.id
   name    = "${element(aws_ses_domain_dkim.homelab_domain.dkim_tokens, count.index)}._domainkey"
   type    = "CNAME"
