@@ -10,8 +10,10 @@ Turning electricity into heat since 2015.
 
 ## Explanation
 
-This monorepo contains the directories below. See each directory for a more detailed `README.md`.
+This directory contains the directories below. See each directory for a more detailed `README.md`.
 
-| Directory                | Contents              | Comments                                        |
-|--------------------------|-----------------------|-------------------------------------------------|
-| [`terraform`](terraform) | Terraform (IaC files) | Each environment is contained in a subdirectory |
+| Directory                      | Contents              | State                                           |
+|--------------------------------|-----------------------|-------------------------------------------------|
+| [`production`](production)     | Terraform (IaC files) | Currently being used, aka "production"          |
+| [`proxmox_test`](proxmox_test) | Terraform (IaC files) | Not being used                                  |
+
