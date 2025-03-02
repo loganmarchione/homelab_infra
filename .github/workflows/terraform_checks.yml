@@ -3,8 +3,6 @@ name: Terraform Checks
 
 on:
   push:
-    paths:
-      - 'terraform/**'
   pull_request:
   schedule:
     - cron: "0 5 * * 0"
@@ -12,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: terraform/production
+    working-directory: production
 
 jobs:
   terraform_lint:
@@ -67,8 +65,8 @@ jobs:
         uses: tenable/terrascan-action@main
         with:
           iac_type: 'terraform'
-          iac_dir: ./terraform/production
-          config_path: ./terraform/production/.terrascan.toml
+          iac_dir: ./production
+          config_path: ./production/.terrascan.toml
           non_recursive: true
           verbose: true
 
@@ -85,8 +83,8 @@ jobs:
       - name: Run KICS
         uses: Checkmarx/kics-github-action@v2.1.5
         with:
-           path: ./terraform/production
-           config_path: ./terraform/production/.kics.yml
+           path: ./production
+           config_path: ./production/.kics.yml
 
   tfsec:
     name: tfsec
@@ -101,5 +99,5 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          working_directory: ./terraform/production
-          additional_args: --config-file ./terraform/production/.tfsec.yml
+          working_directory: ./production
+          additional_args: --config-file ./production/.tfsec.yml
